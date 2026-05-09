@@ -8,32 +8,45 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700;800;900&family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='12' fill='%23F2BB13'/%3E%3Ctext x='50%25' y='50%25' text-anchor='middle' dy='.36em' font-family='sans-serif' font-weight='800' font-size='30' fill='%231F2937'%3E%D9%83%3C/text%3E%3C/svg%3E">
+<link rel="icon" href="../assets/img/cashclinic-logo.webp">
 
 <style>
 :root {
-  --yellow: #F2BB13;
-  --yellow-soft: #FFF8E1;
-  --yellow-deep: #C99500;
-  --dark: #0F172A;
-  --dark-2: #1E293B;
-  --slate: #334155;
-  --gray-700: #374151;
-  --gray-600: #6B7280;
-  --gray-500: #9CA3AF;
-  --gray-300: #D1D5DB;
-  --gray-200: #E5E7EB;
-  --gray-100: #F3F4F6;
-  --gray-50: #F9FAFB;
-  --cream: #FFFBF0;
-  --accent: #C2410C;
-  --success: #047857;
-  --success-light: #D1FAE5;
-  --danger: #B91C1C;
-  --danger-light: #FEE2E2;
-  --blue: #1E40AF;
+  /* === BRAND COLORS (Official) === */
+  --yellow: #F2C402;
+  --yellow-soft: #FEF7CC;
+  --yellow-deep: #B89A02;
+
+  --purple: #702084;
+  --purple-soft: #F3E7F5;
+  --purple-deep: #4A0E5B;
+  --purple-dark: #2E0939;
+
+  --blue: #2578C4;
+  --blue-soft: #E0EEFC;
+  --blue-deep: #1A5288;
+
+  --orange: #F3AF2F;
+  --orange-soft: #FEF1D5;
+  --orange-deep: #C28617;
+
+  /* Neutrals */
+  --cream: #FFFEF5;
+  --white: #FFFFFF;
+  --ink: #1A1A1A;
+  --ink-soft: #4B4B4B;
+  --ink-mute: #8A8A8A;
+  --line: #EAEAEA;
+  --line-soft: #F5F5F5;
+
   --font-ar: 'Tajawal', system-ui, sans-serif;
   --font-en: 'Inter', system-ui, sans-serif;
+
+  /* Animation timings */
+  --t-fast: 0.3s;
+  --t-med: 0.6s;
+  --t-slow: 1.2s;
+  --ease: cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -42,8 +55,8 @@ html, body {
   height: 100%;
   overflow: hidden;
   font-family: var(--font-ar);
-  background: var(--dark);
-  color: var(--dark);
+  background: var(--purple-dark);
+  color: var(--ink);
 }
 
 body {
@@ -53,12 +66,7 @@ body {
 }
 
 /* ========= Slide Container ========= */
-.deck {
-  position: relative;
-  width: 100vw;
-  height: 100vh;
-  overflow: hidden;
-}
+.deck { position: relative; width: 100vw; height: 100vh; overflow: hidden; }
 
 .slide {
   position: absolute;
@@ -67,47 +75,91 @@ body {
   display: none;
   padding: 5vh 6vw;
   background: var(--cream);
-  color: var(--dark);
+  color: var(--ink);
   overflow: hidden;
 }
 .slide.active { display: flex; flex-direction: column; }
 
-.slide.dark { background: var(--dark); color: white; }
-.slide.dark-2 { background: var(--dark-2); color: white; }
-.slide.yellow { background: var(--yellow); color: var(--dark); }
-.slide.yellow-soft { background: var(--yellow-soft); color: var(--dark); }
-.slide.gradient {
-  background: linear-gradient(135deg, var(--dark) 0%, var(--dark-2) 100%);
+.slide.dark { background: var(--purple-dark); color: white; }
+.slide.purple { background: var(--purple); color: white; }
+.slide.purple-deep {
+  background: linear-gradient(135deg, var(--purple-deep) 0%, var(--purple-dark) 100%);
   color: white;
 }
+.slide.yellow { background: var(--yellow); color: var(--ink); }
+.slide.yellow-soft { background: var(--yellow-soft); color: var(--ink); }
+.slide.blue-soft { background: var(--blue-soft); color: var(--ink); }
+.slide.purple-soft { background: var(--purple-soft); color: var(--ink); }
+
+/* ========= Slide Transition (fade-in on activate) ========= */
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(24px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+@keyframes scaleIn {
+  from { opacity: 0; transform: scale(0.94); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+.slide.active .reveal { animation: fadeInUp 0.7s var(--ease) both; }
+.slide.active .reveal-1 { animation-delay: 0.05s; }
+.slide.active .reveal-2 { animation-delay: 0.20s; }
+.slide.active .reveal-3 { animation-delay: 0.35s; }
+.slide.active .reveal-4 { animation-delay: 0.50s; }
+.slide.active .reveal-5 { animation-delay: 0.65s; }
+.slide.active .reveal-6 { animation-delay: 0.80s; }
+.slide.active .reveal-7 { animation-delay: 0.95s; }
+.slide.active .reveal-8 { animation-delay: 1.10s; }
+
+.slide.active .reveal-fade { animation: fadeIn 0.8s var(--ease) both; animation-delay: 0.3s; }
+.slide.active .reveal-scale { animation: scaleIn 0.6s var(--ease) both; animation-delay: 0.2s; }
 
 /* ========= Slide Header ========= */
 .slide-header {
   display: flex; justify-content: space-between; align-items: center;
   font-size: 13px;
-  color: var(--gray-500);
+  color: var(--ink-mute);
   padding-bottom: 16px;
   border-bottom: 1px solid rgba(0,0,0,0.06);
   margin-bottom: 4vh;
   flex-shrink: 0;
 }
 .slide.dark .slide-header,
-.slide.dark-2 .slide-header,
-.slide.gradient .slide-header {
+.slide.purple .slide-header,
+.slide.purple-deep .slide-header {
   color: rgba(255,255,255,0.5);
-  border-bottom-color: rgba(255,255,255,0.08);
+  border-bottom-color: rgba(255,255,255,0.1);
 }
 .slide-brand {
   display: flex; align-items: center; gap: 10px;
 }
 .slide-brand-mark {
-  width: 28px; height: 28px;
-  background: var(--yellow);
-  border-radius: 6px;
+  width: 32px; height: 32px;
+  border-radius: 8px;
+  background: white;
+  padding: 4px;
   display: flex; align-items: center; justify-content: center;
-  font-weight: 800; color: var(--dark); font-size: 14px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.06);
+  overflow: hidden;
 }
-.slide-brand-text { font-weight: 700; color: inherit; font-size: 14px; }
+.slide-brand-mark img {
+  width: 100%; height: 100%; object-fit: contain;
+}
+.slide-brand-text {
+  font-weight: 700; font-size: 14px; color: var(--ink);
+  display: flex; flex-direction: column; line-height: 1.1;
+}
+.slide-brand-text small { font-family: var(--font-en); font-size: 9px; color: var(--ink-mute); letter-spacing: 1px; }
+.slide.dark .slide-brand-text,
+.slide.purple .slide-brand-text,
+.slide.purple-deep .slide-brand-text { color: white; }
+.slide.dark .slide-brand-text small,
+.slide.purple .slide-brand-text small,
+.slide.purple-deep .slide-brand-text small { color: rgba(255,255,255,0.55); }
 .slide-meta { font-family: var(--font-en); letter-spacing: 1px; font-size: 11px; }
 
 /* ========= Slide Body ========= */
@@ -115,18 +167,29 @@ body {
 
 /* ========= Eyebrow + Title Patterns ========= */
 .eyebrow {
-  display: inline-block;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
   font-family: var(--font-en);
   font-size: 13px;
   letter-spacing: 3px;
   font-weight: 700;
-  color: var(--yellow-deep);
+  color: var(--orange-deep);
   text-transform: uppercase;
   margin-bottom: 16px;
 }
+.eyebrow::before {
+  content: '';
+  display: inline-block;
+  width: 28px; height: 2px;
+  background: var(--yellow);
+}
 .slide.dark .eyebrow,
-.slide.dark-2 .eyebrow,
-.slide.gradient .eyebrow { color: var(--yellow); }
+.slide.purple .eyebrow,
+.slide.purple-deep .eyebrow { color: var(--yellow); }
+.slide.purple .eyebrow::before,
+.slide.purple-deep .eyebrow::before,
+.slide.dark .eyebrow::before { background: var(--orange); }
 
 .title-h1 {
   font-size: clamp(40px, 5.5vw, 72px);
@@ -141,50 +204,58 @@ body {
   line-height: 1.2;
   margin-bottom: 16px;
 }
-.title-h3 {
-  font-size: clamp(22px, 2.4vw, 32px);
-  font-weight: 700;
-  line-height: 1.3;
-}
 .lead {
   font-size: clamp(17px, 1.5vw, 22px);
   line-height: 1.6;
-  color: var(--slate);
+  color: var(--ink-soft);
   max-width: 880px;
 }
 .slide.dark .lead,
-.slide.dark-2 .lead,
-.slide.gradient .lead { color: rgba(255,255,255,0.78); }
+.slide.purple .lead,
+.slide.purple-deep .lead { color: rgba(255,255,255,0.78); }
 
-.highlight-yellow { color: var(--yellow-deep); }
-.slide.dark .highlight-yellow,
-.slide.dark-2 .highlight-yellow,
-.slide.gradient .highlight-yellow { color: var(--yellow); }
+.h-yellow { color: var(--yellow-deep); }
+.h-blue { color: var(--blue); }
+.h-orange { color: var(--orange-deep); }
+.h-purple { color: var(--purple); }
+.slide.dark .h-yellow,
+.slide.purple .h-yellow,
+.slide.purple-deep .h-yellow { color: var(--yellow); }
+.slide.dark .h-blue,
+.slide.purple .h-blue,
+.slide.purple-deep .h-blue { color: var(--blue); }
+.slide.dark .h-orange,
+.slide.purple .h-orange,
+.slide.purple-deep .h-orange { color: var(--orange); }
+.slide.dark .h-purple,
+.slide.purple .h-purple,
+.slide.purple-deep .h-purple { color: #C7A0D5; }
 
 /* ========= Footer / Pagination ========= */
 .slide-footer {
   display: flex; justify-content: space-between; align-items: center;
   font-size: 12px;
-  color: var(--gray-500);
+  color: var(--ink-mute);
   padding-top: 16px;
   border-top: 1px solid rgba(0,0,0,0.06);
   margin-top: 4vh;
   flex-shrink: 0;
 }
 .slide.dark .slide-footer,
-.slide.dark-2 .slide-footer,
-.slide.gradient .slide-footer {
+.slide.purple .slide-footer,
+.slide.purple-deep .slide-footer {
   color: rgba(255,255,255,0.5);
-  border-top-color: rgba(255,255,255,0.08);
+  border-top-color: rgba(255,255,255,0.1);
 }
 .slide-page { font-family: var(--font-en); letter-spacing: 1px; }
 
 /* ========= Cover Slide ========= */
 .cover-bg {
   background:
-    radial-gradient(circle at 90% 10%, rgba(242,187,19,0.18) 0%, transparent 40%),
-    radial-gradient(circle at 10% 90%, rgba(242,187,19,0.08) 0%, transparent 40%),
-    var(--dark);
+    radial-gradient(circle at 90% 10%, rgba(242,196,2,0.10) 0%, transparent 50%),
+    radial-gradient(circle at 10% 90%, rgba(112,32,132,0.12) 0%, transparent 50%),
+    radial-gradient(circle at 50% 50%, rgba(37,120,196,0.08) 0%, transparent 60%),
+    var(--purple-dark);
 }
 .cover-content {
   flex: 1;
@@ -196,22 +267,25 @@ body {
   display: flex; align-items: center; gap: 18px;
   margin-bottom: 5vh;
 }
-.cover-mark .brand-logo {
-  width: 60px; height: 60px;
-  background: var(--yellow);
-  border-radius: 14px;
+.cover-mark-img {
+  width: 86px; height: 86px;
+  background: white;
+  border-radius: 18px;
+  padding: 8px;
   display: flex; align-items: center; justify-content: center;
-  font-weight: 900; color: var(--dark); font-size: 32px;
-  box-shadow: 0 8px 32px rgba(242,187,19,0.25);
+  box-shadow: 0 12px 40px rgba(242,196,2,0.20);
+  overflow: hidden;
 }
+.cover-mark-img img { width: 100%; height: 100%; object-fit: contain; }
 .cover-brand-name {
-  font-size: 28px; font-weight: 800; color: white;
+  font-size: 36px; font-weight: 900; color: white;
   line-height: 1;
 }
 .cover-brand-en {
-  font-family: var(--font-en); font-size: 14px;
-  color: rgba(255,255,255,0.6); letter-spacing: 3px;
-  margin-top: 4px;
+  font-family: var(--font-en); font-size: 16px;
+  color: var(--yellow); letter-spacing: 4px;
+  margin-top: 6px;
+  font-weight: 700;
 }
 .cover-headline {
   font-size: clamp(48px, 7vw, 96px);
@@ -233,11 +307,28 @@ body {
   display: flex; gap: 32px;
   font-family: var(--font-en);
   font-size: 13px;
-  color: rgba(255,255,255,0.5);
+  color: rgba(255,255,255,0.55);
   letter-spacing: 2px;
   text-transform: uppercase;
 }
 .cover-meta span strong { color: var(--yellow); }
+
+/* Floating dots animation on cover */
+.cover-dots {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.6;
+}
+.cover-dot {
+  position: absolute;
+  border-radius: 50%;
+  animation: floatDot 8s ease-in-out infinite;
+}
+@keyframes floatDot {
+  0%, 100% { transform: translateY(0) translateX(0); }
+  50% { transform: translateY(-20px) translateX(10px); }
+}
 
 /* ========= Numbers / Stats ========= */
 .big-stat {
@@ -250,18 +341,21 @@ body {
   font-weight: 900;
   line-height: 0.9;
   letter-spacing: -3px;
-  color: var(--dark);
+  color: var(--ink);
+  font-variant-numeric: tabular-nums;
 }
 .slide.dark .big-stat-num,
-.slide.gradient .big-stat-num { color: var(--yellow); }
-.slide.yellow .big-stat-num { color: var(--dark); }
+.slide.purple .big-stat-num,
+.slide.purple-deep .big-stat-num { color: var(--yellow); }
+.slide.yellow .big-stat-num { color: var(--ink); }
 .big-stat-label {
   font-size: clamp(14px, 1.2vw, 18px);
-  color: var(--slate);
+  color: var(--ink-soft);
   font-weight: 500;
 }
 .slide.dark .big-stat-label,
-.slide.gradient .big-stat-label { color: rgba(255,255,255,0.7); }
+.slide.purple .big-stat-label,
+.slide.purple-deep .big-stat-label { color: rgba(255,255,255,0.7); }
 
 .stats-row {
   display: grid;
@@ -270,29 +364,7 @@ body {
   align-items: end;
 }
 
-.stat-card-impact {
-  padding: clamp(24px, 3vw, 40px);
-  border-radius: 16px;
-  background: white;
-  box-shadow: 0 10px 40px rgba(0,0,0,0.06);
-  border: 1px solid var(--gray-200);
-}
-.slide.dark .stat-card-impact,
-.slide.gradient .stat-card-impact {
-  background: rgba(255,255,255,0.05);
-  border-color: rgba(255,255,255,0.1);
-}
-
-/* ========= Two Column ========= */
-.two-col {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: clamp(32px, 5vw, 80px);
-  align-items: center;
-}
-.two-col.uneven { grid-template-columns: 1.3fr 1fr; }
-
-/* ========= Bar Chart ========= */
+/* ========= Bar Chart with Animation ========= */
 .bar-chart { display: flex; flex-direction: column; gap: 14px; margin-top: 24px; }
 .bar-row {
   display: grid;
@@ -301,42 +373,52 @@ body {
   align-items: center;
   font-size: clamp(14px, 1.1vw, 18px);
 }
-.bar-label { font-weight: 700; color: var(--dark); }
+.bar-label { font-weight: 700; color: var(--ink); display: flex; align-items: center; gap: 8px; }
+.bar-flag { font-size: 22px; }
 .slide.dark .bar-label,
-.slide.gradient .bar-label { color: white; }
+.slide.purple-deep .bar-label { color: white; }
 .bar-track {
-  height: 18px;
-  background: var(--gray-100);
+  height: 22px;
+  background: rgba(0,0,0,0.06);
   border-radius: 99px;
   overflow: hidden;
   position: relative;
 }
 .slide.dark .bar-track,
-.slide.gradient .bar-track { background: rgba(255,255,255,0.08); }
+.slide.purple-deep .bar-track { background: rgba(255,255,255,0.08); }
 .bar-fill {
   height: 100%;
-  background: var(--yellow);
   border-radius: 99px;
-  transition: width 0.6s ease;
+  width: 0;
+  transition: width 1.2s cubic-bezier(0.22, 1, 0.36, 1);
 }
+.slide.active.animate-charts .bar-fill {
+  width: var(--w);
+  transition-delay: var(--d, 0s);
+}
+.bar-fill.c-yellow { background: linear-gradient(90deg, var(--yellow) 0%, var(--orange) 100%); }
+.bar-fill.c-blue { background: linear-gradient(90deg, var(--blue) 0%, #4A9DDF 100%); }
+.bar-fill.c-orange { background: linear-gradient(90deg, var(--orange) 0%, #F8C56C 100%); }
+.bar-fill.c-purple { background: linear-gradient(90deg, var(--purple) 0%, #9B4FB0 100%); }
+
 .bar-num {
   font-family: var(--font-en);
   font-weight: 700;
   font-variant-numeric: tabular-nums;
   text-align: left;
-  color: var(--dark);
+  color: var(--ink);
 }
 .slide.dark .bar-num,
-.slide.gradient .bar-num { color: white; }
+.slide.purple-deep .bar-num { color: white; }
 .bar-pct {
   font-family: var(--font-en);
   font-size: 13px;
   font-weight: 600;
-  color: var(--gray-600);
+  color: var(--ink-mute);
   text-align: left;
 }
 .slide.dark .bar-pct,
-.slide.gradient .bar-pct { color: rgba(255,255,255,0.6); }
+.slide.purple-deep .bar-pct { color: rgba(255,255,255,0.65); }
 
 /* ========= Vertical Bars (Year Growth) ========= */
 .year-chart {
@@ -346,12 +428,22 @@ body {
   align-items: end;
   height: 50vh;
   padding: 32px 0;
+  position: relative;
 }
+.year-chart::before {
+  content: '';
+  position: absolute;
+  bottom: 60px; right: 0; left: 0;
+  height: 1px;
+  background: rgba(0,0,0,0.08);
+}
+.slide.dark .year-chart::before,
+.slide.purple-deep .year-chart::before { background: rgba(255,255,255,0.1); }
 .year-col { display: flex; flex-direction: column; align-items: center; height: 100%; justify-content: flex-end; }
 .year-bar {
   width: 100%;
-  background: linear-gradient(180deg, var(--yellow) 0%, var(--yellow-deep) 100%);
-  border-radius: 8px 8px 0 0;
+  height: 0;
+  border-radius: 12px 12px 0 0;
   position: relative;
   display: flex;
   align-items: flex-start;
@@ -359,27 +451,33 @@ body {
   padding-top: 16px;
   font-family: var(--font-en);
   font-weight: 800;
-  color: var(--dark);
+  color: var(--ink);
   font-size: clamp(16px, 1.4vw, 22px);
+  transition: height 1.2s cubic-bezier(0.22, 1, 0.36, 1);
+  box-shadow: 0 -4px 20px rgba(0,0,0,0.04);
 }
+.slide.active.animate-charts .year-bar {
+  height: var(--h);
+  transition-delay: var(--d, 0s);
+}
+.year-bar.b-blue { background: linear-gradient(180deg, #4A9DDF 0%, var(--blue) 100%); color: white; }
+.year-bar.b-orange { background: linear-gradient(180deg, var(--orange) 0%, var(--orange-deep) 100%); color: white; }
+.year-bar.b-yellow { background: linear-gradient(180deg, var(--yellow) 0%, var(--orange) 100%); color: var(--ink); }
+.year-bar.b-purple { background: linear-gradient(180deg, #9B4FB0 0%, var(--purple) 100%); color: white; opacity: 0.85; }
 .year-label {
   margin-top: 12px;
   font-weight: 700;
   font-family: var(--font-en);
   font-size: clamp(13px, 1vw, 16px);
-  color: var(--slate);
+  color: var(--ink-soft);
 }
-.year-sublabel {
-  font-size: 11px;
-  color: var(--gray-600);
-  margin-top: 2px;
-}
+.year-sublabel { font-size: 11px; color: var(--ink-mute); margin-top: 2px; }
 .slide.dark .year-label,
-.slide.gradient .year-label { color: rgba(255,255,255,0.85); }
+.slide.purple-deep .year-label { color: rgba(255,255,255,0.85); }
 .slide.dark .year-sublabel,
-.slide.gradient .year-sublabel { color: rgba(255,255,255,0.55); }
+.slide.purple-deep .year-sublabel { color: rgba(255,255,255,0.55); }
 
-/* ========= Donut for channels ========= */
+/* ========= Donut for channels with animation ========= */
 .donut-block {
   display: flex; align-items: center; gap: clamp(32px, 5vw, 80px);
   justify-content: center;
@@ -391,6 +489,23 @@ body {
   flex-shrink: 0;
 }
 .donut svg { width: 100%; height: 100%; transform: rotate(-90deg); }
+.donut-track {
+  fill: none;
+  stroke: rgba(112,32,132,0.12);
+  stroke-width: 14;
+}
+.donut-progress {
+  fill: none;
+  stroke-width: 14;
+  stroke-linecap: butt;
+  stroke-dasharray: 251.33;
+  stroke-dashoffset: 251.33;
+  transition: stroke-dashoffset 1.4s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.slide.active.animate-charts .donut-progress {
+  stroke-dashoffset: var(--offset);
+  transition-delay: 0.3s;
+}
 .donut-center {
   position: absolute; inset: 0;
   display: flex; flex-direction: column;
@@ -400,14 +515,14 @@ body {
   font-family: var(--font-en);
   font-size: clamp(36px, 4vw, 56px);
   font-weight: 900;
-  color: var(--dark);
+  color: var(--ink);
   line-height: 1;
 }
 .slide.dark .donut-center-num,
-.slide.gradient .donut-center-num { color: white; }
-.donut-center-label { font-size: 14px; color: var(--gray-600); margin-top: 8px; }
+.slide.purple-deep .donut-center-num { color: white; }
+.donut-center-label { font-size: 14px; color: var(--ink-mute); margin-top: 8px; }
 .slide.dark .donut-center-label,
-.slide.gradient .donut-center-label { color: rgba(255,255,255,0.6); }
+.slide.purple-deep .donut-center-label { color: rgba(255,255,255,0.6); }
 .donut-legend { display: flex; flex-direction: column; gap: 16px; }
 .donut-item {
   display: flex; align-items: center; gap: 14px;
@@ -415,18 +530,16 @@ body {
 }
 .donut-dot { width: 18px; height: 18px; border-radius: 4px; flex-shrink: 0; }
 .donut-item-text { display: flex; flex-direction: column; }
-.donut-item-name { font-weight: 700; color: var(--dark); }
+.donut-item-name { font-weight: 700; color: var(--ink); }
 .slide.dark .donut-item-name,
-.slide.gradient .donut-item-name { color: white; }
+.slide.purple-deep .donut-item-name { color: white; }
 .donut-item-meta {
-  font-family: var(--font-en);
-  font-size: 13px;
-  color: var(--gray-600);
+  font-family: var(--font-en); font-size: 13px; color: var(--ink-mute);
 }
 .slide.dark .donut-item-meta,
-.slide.gradient .donut-item-meta { color: rgba(255,255,255,0.6); }
+.slide.purple-deep .donut-item-meta { color: rgba(255,255,255,0.6); }
 
-/* ========= Pain Points / Lists ========= */
+/* ========= Pain cards ========= */
 .pain-grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
@@ -435,181 +548,174 @@ body {
 .pain-card {
   padding: clamp(20px, 2vw, 32px);
   background: white;
-  border: 1px solid var(--gray-200);
-  border-radius: 12px;
-  border-right: 4px solid var(--danger);
+  border-radius: 14px;
+  border-right: 4px solid var(--orange);
+  box-shadow: 0 4px 20px rgba(0,0,0,0.04);
+  transition: transform 0.3s var(--ease), box-shadow 0.3s var(--ease);
+}
+.pain-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 32px rgba(112,32,132,0.10);
 }
 .slide.dark .pain-card,
-.slide.gradient .pain-card {
+.slide.purple-deep .pain-card {
   background: rgba(255,255,255,0.04);
-  border: 1px solid rgba(255,255,255,0.08);
-  border-right: 4px solid var(--danger);
+  border-right: 4px solid var(--orange);
 }
 .pain-num {
   font-family: var(--font-en);
   font-size: 12px;
   letter-spacing: 2px;
   font-weight: 700;
-  color: var(--danger);
+  color: var(--orange-deep);
   margin-bottom: 8px;
 }
 .pain-h {
   font-size: clamp(17px, 1.5vw, 22px);
   font-weight: 700;
   margin-bottom: 8px;
-  color: var(--dark);
+  color: var(--ink);
 }
 .slide.dark .pain-h,
-.slide.gradient .pain-h { color: white; }
-.pain-text { font-size: 14px; color: var(--slate); line-height: 1.7; }
+.slide.purple-deep .pain-h { color: white; }
+.pain-text { font-size: 14px; color: var(--ink-soft); line-height: 1.7; }
 .slide.dark .pain-text,
-.slide.gradient .pain-text { color: rgba(255,255,255,0.7); }
+.slide.purple-deep .pain-text { color: rgba(255,255,255,0.7); }
 
 /* ========= Funnel ========= */
-.funnel {
-  display: flex; flex-direction: column;
-  gap: 12px;
-  max-width: 900px;
-  margin: 24px auto;
-}
+.funnel { display: flex; flex-direction: column; gap: 12px; max-width: 980px; margin: 24px auto; }
 .funnel-stage {
   background: white;
-  border: 1px solid var(--gray-200);
-  border-right: 5px solid var(--yellow);
-  border-radius: 10px;
+  border-radius: 12px;
   padding: 16px 24px;
   display: grid;
   grid-template-columns: 60px 1fr 200px;
   gap: 20px;
   align-items: center;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+  transition: transform 0.3s var(--ease), box-shadow 0.3s var(--ease);
 }
-.slide.dark .funnel-stage,
-.slide.gradient .funnel-stage {
-  background: rgba(255,255,255,0.04);
-  border-color: rgba(255,255,255,0.08);
-  border-right-color: var(--yellow);
-}
+.funnel-stage:hover { transform: translateX(-6px); box-shadow: 0 8px 24px rgba(0,0,0,0.08); }
+.funnel-stage[data-color="blue"] { border-right: 5px solid var(--blue); }
+.funnel-stage[data-color="purple"] { border-right: 5px solid var(--purple); }
+.funnel-stage[data-color="orange"] { border-right: 5px solid var(--orange); }
+.funnel-stage[data-color="yellow"] { border-right: 5px solid var(--yellow); }
 .funnel-num {
   font-family: var(--font-en);
-  font-size: clamp(24px, 2.5vw, 36px);
+  font-size: clamp(28px, 2.6vw, 40px);
   font-weight: 900;
-  color: var(--yellow-deep);
   text-align: center;
 }
-.slide.dark .funnel-num,
-.slide.gradient .funnel-num { color: var(--yellow); }
-.funnel-label-h {
-  font-size: clamp(15px, 1.3vw, 19px);
-  font-weight: 700;
-  color: var(--dark);
-}
-.slide.dark .funnel-label-h,
-.slide.gradient .funnel-label-h { color: white; }
-.funnel-label-sub { font-size: 13px; color: var(--gray-600); margin-top: 2px; }
-.slide.dark .funnel-label-sub,
-.slide.gradient .funnel-label-sub { color: rgba(255,255,255,0.5); }
-.funnel-stage[data-tier="5"] {
-  background: var(--dark);
+.funnel-stage[data-color="blue"] .funnel-num { color: var(--blue); }
+.funnel-stage[data-color="purple"] .funnel-num { color: var(--purple); }
+.funnel-stage[data-color="orange"] .funnel-num { color: var(--orange-deep); }
+.funnel-stage[data-color="yellow"] .funnel-num { color: var(--yellow-deep); }
+.funnel-label-h { font-size: clamp(15px, 1.3vw, 19px); font-weight: 700; color: var(--ink); }
+.funnel-label-sub { font-size: 13px; color: var(--ink-soft); margin-top: 2px; }
+.funnel-stage[data-tier="peak"] {
+  background: linear-gradient(135deg, var(--purple) 0%, var(--purple-deep) 100%);
   color: white;
-  border-color: var(--dark);
+  border-color: var(--purple);
   transform: scaleX(0.92);
   transform-origin: right;
+  box-shadow: 0 12px 32px rgba(112,32,132,0.30);
 }
-.funnel-stage[data-tier="5"] .funnel-label-h { color: white; }
-.funnel-stage[data-tier="5"] .funnel-num { color: var(--yellow); }
-.funnel-stage[data-tier="5"] .funnel-label-sub { color: rgba(255,255,255,0.6); }
+.funnel-stage[data-tier="peak"] .funnel-label-h { color: white; }
+.funnel-stage[data-tier="peak"] .funnel-num { color: var(--yellow); }
+.funnel-stage[data-tier="peak"] .funnel-label-sub { color: rgba(255,255,255,0.7); }
+.funnel-stage[data-tier="peak"]:hover { transform: scaleX(0.92) translateX(-6px); }
 .funnel-tier-tag {
-  font-family: var(--font-en);
-  font-size: 11px;
-  letter-spacing: 1.5px;
-  font-weight: 700;
-  text-transform: uppercase;
-  text-align: left;
-  color: var(--gray-500);
+  font-family: var(--font-en); font-size: 11px; letter-spacing: 1.5px;
+  font-weight: 700; text-transform: uppercase; text-align: left;
+  color: var(--ink-mute);
 }
-.slide.dark .funnel-tier-tag,
-.slide.gradient .funnel-tier-tag { color: rgba(255,255,255,0.5); }
-.funnel-stage[data-tier="5"] .funnel-tier-tag { color: var(--yellow); }
+.funnel-stage[data-tier="peak"] .funnel-tier-tag { color: var(--yellow); }
 .funnel-price {
-  font-family: var(--font-en);
-  font-weight: 800;
-  font-size: clamp(14px, 1.2vw, 18px);
-  text-align: left;
-  color: var(--dark);
+  font-family: var(--font-en); font-weight: 800;
+  font-size: clamp(14px, 1.2vw, 18px); text-align: left; color: var(--ink);
 }
-.slide.dark .funnel-price,
-.slide.gradient .funnel-price { color: white; }
-.funnel-stage[data-tier="5"] .funnel-price { color: var(--yellow); }
+.funnel-stage[data-tier="peak"] .funnel-price { color: var(--yellow); }
 
 /* ========= Departments ========= */
 .dept-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
+  display: grid; grid-template-columns: 1fr 1fr;
   gap: clamp(20px, 3vw, 40px);
 }
 .dept-card {
   background: white;
-  border-radius: 16px;
+  border-radius: 18px;
   padding: clamp(28px, 3vw, 44px);
-  border: 1px solid var(--gray-200);
-  box-shadow: 0 8px 30px rgba(0,0,0,0.04);
+  box-shadow: 0 8px 30px rgba(0,0,0,0.05);
   display: flex; flex-direction: column;
   position: relative;
   overflow: hidden;
+  transition: transform 0.4s var(--ease), box-shadow 0.4s var(--ease);
 }
-.dept-card::before {
-  content: ''; position: absolute;
-  top: 0; right: 0;
-  width: 80px; height: 80px;
-  background: var(--yellow);
-  opacity: 0.08;
-  border-radius: 0 0 0 80px;
+.dept-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 16px 48px rgba(112,32,132,0.12);
 }
+.dept-card.family { border-top: 4px solid var(--yellow); }
+.dept-card.family::before { content: ''; position: absolute; top: 0; right: 0; width: 100px; height: 100px; background: var(--yellow); opacity: 0.10; border-radius: 0 0 0 100px; }
+.dept-card.founders { border-top: 4px solid var(--blue); }
+.dept-card.founders::before { content: ''; position: absolute; top: 0; right: 0; width: 100px; height: 100px; background: var(--blue); opacity: 0.10; border-radius: 0 0 0 100px; }
+
 .dept-icon {
-  width: 56px; height: 56px;
-  background: var(--yellow-soft);
-  border-radius: 12px;
+  width: 64px; height: 64px;
+  border-radius: 14px;
   display: flex; align-items: center; justify-content: center;
   margin-bottom: 20px;
+  position: relative; z-index: 1;
 }
-.dept-icon svg { width: 32px; height: 32px; stroke: var(--yellow-deep); }
-.dept-name { font-size: clamp(22px, 2vw, 30px); font-weight: 800; margin-bottom: 8px; color: var(--dark); }
-.dept-en { font-family: var(--font-en); font-size: 12px; color: var(--gray-500); letter-spacing: 2px; margin-bottom: 16px; }
-.dept-text { font-size: 16px; color: var(--slate); line-height: 1.7; margin-bottom: 20px; }
+.dept-card.family .dept-icon { background: var(--yellow-soft); color: var(--orange-deep); }
+.dept-card.founders .dept-icon { background: var(--blue-soft); color: var(--blue-deep); }
+.dept-icon svg { width: 36px; height: 36px; stroke-width: 2; }
+.dept-name { font-size: clamp(22px, 2vw, 30px); font-weight: 800; margin-bottom: 8px; color: var(--ink); }
+.dept-en { font-family: var(--font-en); font-size: 12px; color: var(--ink-mute); letter-spacing: 2px; margin-bottom: 16px; }
+.dept-text { font-size: 16px; color: var(--ink-soft); line-height: 1.7; margin-bottom: 20px; }
 .dept-leads {
-  font-size: 13px;
-  color: var(--gray-600);
-  border-top: 1px solid var(--gray-200);
-  padding-top: 14px;
-  margin-top: auto;
+  font-size: 13px; color: var(--ink-soft);
+  border-top: 1px solid var(--line);
+  padding-top: 14px; margin-top: auto;
 }
-.dept-leads strong { color: var(--dark); }
+.dept-leads strong { color: var(--ink); }
 
 /* ========= Team ========= */
 .team-grid {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  display: grid; grid-template-columns: repeat(4, 1fr);
   gap: clamp(20px, 2vw, 28px);
 }
 .team-card {
   background: white;
-  border-radius: 12px;
+  border-radius: 14px;
   padding: clamp(20px, 2vw, 28px);
   text-align: center;
-  border: 1px solid var(--gray-200);
+  box-shadow: 0 2px 12px rgba(0,0,0,0.04);
+  transition: transform 0.3s var(--ease), box-shadow 0.3s var(--ease);
+}
+.team-card:hover {
+  transform: translateY(-4px) scale(1.02);
+  box-shadow: 0 12px 32px rgba(0,0,0,0.10);
 }
 .team-avatar {
-  width: 80px; height: 80px;
-  background: linear-gradient(135deg, var(--yellow) 0%, var(--yellow-deep) 100%);
+  width: 88px; height: 88px;
   border-radius: 50%;
   display: flex; align-items: center; justify-content: center;
-  font-weight: 800; font-size: 28px; color: var(--dark);
+  font-weight: 900; font-size: 32px; color: white;
   margin: 0 auto 16px;
-  box-shadow: 0 8px 20px rgba(242,187,19,0.3);
+  font-family: var(--font-ar);
 }
-.team-name { font-size: clamp(16px, 1.4vw, 20px); font-weight: 700; color: var(--dark); margin-bottom: 4px; }
-.team-role { font-size: 13px; color: var(--yellow-deep); font-weight: 600; margin-bottom: 12px; }
-.team-bio { font-size: 13px; color: var(--gray-600); line-height: 1.6; }
+.team-card:nth-child(1) .team-avatar { background: linear-gradient(135deg, var(--yellow) 0%, var(--orange) 100%); color: var(--ink); box-shadow: 0 8px 20px rgba(242,196,2,0.30); }
+.team-card:nth-child(2) .team-avatar { background: linear-gradient(135deg, var(--purple) 0%, var(--purple-deep) 100%); box-shadow: 0 8px 20px rgba(112,32,132,0.30); }
+.team-card:nth-child(3) .team-avatar { background: linear-gradient(135deg, var(--blue) 0%, var(--blue-deep) 100%); box-shadow: 0 8px 20px rgba(37,120,196,0.30); }
+.team-card:nth-child(4) .team-avatar { background: linear-gradient(135deg, var(--orange) 0%, var(--orange-deep) 100%); box-shadow: 0 8px 20px rgba(243,175,47,0.30); }
+.team-name { font-size: clamp(16px, 1.4vw, 20px); font-weight: 700; color: var(--ink); margin-bottom: 4px; }
+.team-role { font-size: 13px; font-weight: 600; margin-bottom: 12px; }
+.team-card:nth-child(1) .team-role { color: var(--orange-deep); }
+.team-card:nth-child(2) .team-role { color: var(--purple); }
+.team-card:nth-child(3) .team-role { color: var(--blue); }
+.team-card:nth-child(4) .team-role { color: var(--orange-deep); }
+.team-bio { font-size: 13px; color: var(--ink-soft); line-height: 1.6; }
 
 /* ========= Section Divider ========= */
 .section-divider .slide-body {
@@ -618,406 +724,343 @@ body {
 }
 .section-divider-num {
   font-family: var(--font-en);
-  font-size: clamp(120px, 18vw, 280px);
+  font-size: clamp(140px, 22vw, 320px);
   font-weight: 900;
-  color: rgba(242,187,19,0.18);
+  color: rgba(242,196,2,0.18);
   line-height: 0.8;
-  letter-spacing: -8px;
+  letter-spacing: -10px;
   position: absolute;
   top: 5vh;
   left: 5vw;
   z-index: 0;
+  animation: scaleIn 1s var(--ease) both;
+  animation-delay: 0.1s;
 }
 .section-divider-content { position: relative; z-index: 1; }
 
-/* ========= Why us / Value props ========= */
+/* ========= Value props ========= */
 .value-list {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: clamp(16px, 1.5vw, 24px);
-  margin-top: 24px;
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: clamp(16px, 1.5vw, 24px); margin-top: 24px;
 }
 .value-item {
   display: flex; gap: 16px; align-items: flex-start;
   padding: clamp(16px, 1.6vw, 22px);
-  background: white;
+  background: rgba(255,255,255,0.06);
   border-radius: 10px;
-  border: 1px solid var(--gray-200);
+  border: 1px solid rgba(255,255,255,0.10);
+  transition: all 0.3s var(--ease);
 }
-.slide.dark .value-item,
-.slide.gradient .value-item {
-  background: rgba(255,255,255,0.04);
-  border-color: rgba(255,255,255,0.08);
+.value-item:hover {
+  background: rgba(255,255,255,0.10);
+  transform: translateX(-4px);
+  border-color: var(--yellow);
 }
 .value-check {
   width: 32px; height: 32px;
-  background: var(--yellow);
   border-radius: 8px;
   flex-shrink: 0;
   display: flex; align-items: center; justify-content: center;
-  font-weight: 900; color: var(--dark);
+  font-weight: 900;
   font-size: 16px;
+  background: var(--yellow); color: var(--ink);
 }
-.value-text { font-size: clamp(14px, 1.15vw, 17px); line-height: 1.7; color: var(--slate); }
-.value-text strong { color: var(--dark); font-weight: 700; }
-.slide.dark .value-text,
-.slide.gradient .value-text { color: rgba(255,255,255,0.85); }
-.slide.dark .value-text strong,
-.slide.gradient .value-text strong { color: white; }
+.value-text { font-size: clamp(14px, 1.15vw, 17px); line-height: 1.7; color: rgba(255,255,255,0.85); }
+.value-text strong { color: white; font-weight: 700; }
 
 /* ========= 4-Session Timeline ========= */
 .timeline-4 {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: clamp(16px, 1.5vw, 24px);
-  position: relative;
+  display: grid; grid-template-columns: repeat(4, 1fr);
+  gap: clamp(16px, 1.5vw, 24px); position: relative;
 }
 .timeline-4::before {
-  content: '';
-  position: absolute;
-  top: 38px;
-  right: 8%;
-  left: 8%;
-  height: 2px;
-  background: var(--yellow);
-  z-index: 0;
+  content: ''; position: absolute; top: 38px;
+  right: 8%; left: 8%; height: 3px;
+  background: linear-gradient(90deg, var(--blue) 0%, var(--orange) 50%, var(--yellow) 100%);
+  z-index: 0; border-radius: 2px;
 }
 .tl-step {
-  background: white;
-  border-radius: 12px;
+  background: white; border-radius: 14px;
   padding: clamp(16px, 1.5vw, 24px);
-  border: 1px solid var(--gray-200);
-  position: relative;
-  z-index: 1;
+  position: relative; z-index: 1;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.04);
+  transition: transform 0.3s var(--ease);
 }
+.tl-step:hover { transform: translateY(-4px); }
 .tl-step-num {
-  width: 56px; height: 56px;
-  background: var(--yellow);
+  width: 64px; height: 64px;
   border-radius: 50%;
   display: flex; align-items: center; justify-content: center;
-  font-weight: 900; font-size: 28px; color: var(--dark);
+  font-weight: 900; font-size: 28px;
   margin: 0 auto 14px;
   font-family: var(--font-en);
-  box-shadow: 0 0 0 6px white, 0 0 0 7px var(--yellow);
+  box-shadow: 0 0 0 8px white, 0 0 0 9px currentColor;
+  color: white;
 }
+.tl-step:nth-child(1) .tl-step-num { background: var(--blue); }
+.tl-step:nth-child(2) .tl-step-num { background: var(--purple); }
+.tl-step:nth-child(3) .tl-step-num { background: var(--orange); }
+.tl-step:nth-child(4) .tl-step-num { background: var(--yellow); color: var(--ink); }
 .tl-step-week {
-  font-family: var(--font-en);
-  font-size: 11px;
-  letter-spacing: 1px;
-  font-weight: 700;
-  text-transform: uppercase;
-  color: var(--yellow-deep);
-  text-align: center;
+  font-family: var(--font-en); font-size: 11px; letter-spacing: 1px;
+  font-weight: 700; text-transform: uppercase; text-align: center;
   margin-bottom: 6px;
 }
-.tl-step-name {
-  font-size: clamp(15px, 1.2vw, 18px);
-  font-weight: 700;
-  text-align: center;
-  margin-bottom: 8px;
-  color: var(--dark);
-}
-.tl-step-text {
-  font-size: 13px;
-  color: var(--slate);
-  line-height: 1.6;
-  text-align: center;
-}
+.tl-step:nth-child(1) .tl-step-week { color: var(--blue); }
+.tl-step:nth-child(2) .tl-step-week { color: var(--purple); }
+.tl-step:nth-child(3) .tl-step-week { color: var(--orange-deep); }
+.tl-step:nth-child(4) .tl-step-week { color: var(--yellow-deep); }
+.tl-step-name { font-size: clamp(15px, 1.2vw, 18px); font-weight: 700; text-align: center; margin-bottom: 8px; color: var(--ink); }
+.tl-step-text { font-size: 13px; color: var(--ink-soft); line-height: 1.6; text-align: center; }
 
 /* ========= Process flow ========= */
 .process-list {
   display: flex; flex-direction: column;
-  gap: 12px;
-  margin-top: 16px;
+  gap: 12px; margin-top: 16px;
 }
 .proc-row {
-  display: grid;
-  grid-template-columns: 60px 1fr;
-  gap: 18px;
-  align-items: flex-start;
+  display: grid; grid-template-columns: 60px 1fr;
+  gap: 18px; align-items: flex-start;
   padding: 16px 22px;
-  background: white;
-  border: 1px solid var(--gray-200);
-  border-radius: 10px;
-  transition: all 0.15s;
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 12px;
+  transition: all 0.3s var(--ease);
 }
-.slide.dark .proc-row,
-.slide.gradient .proc-row {
-  background: rgba(255,255,255,0.04);
-  border-color: rgba(255,255,255,0.08);
+.proc-row:hover {
+  background: rgba(255,255,255,0.10);
+  border-color: var(--yellow);
+  transform: translateX(-4px);
 }
 .proc-num {
-  width: 44px; height: 44px;
-  background: var(--yellow);
-  border-radius: 50%;
+  width: 48px; height: 48px; border-radius: 50%;
   display: flex; align-items: center; justify-content: center;
-  font-weight: 800; color: var(--dark);
+  font-weight: 800; color: var(--ink);
   font-family: var(--font-en); font-size: 18px;
+  background: var(--yellow);
 }
-.proc-title {
-  font-size: clamp(14px, 1.2vw, 17px);
-  font-weight: 700; color: var(--dark);
-  margin-bottom: 4px;
-}
-.slide.dark .proc-title,
-.slide.gradient .proc-title { color: white; }
-.proc-text { font-size: 13px; color: var(--slate); line-height: 1.6; }
-.slide.dark .proc-text,
-.slide.gradient .proc-text { color: rgba(255,255,255,0.7); }
-.proc-tag {
-  display: inline-block;
-  font-size: 11px;
-  background: var(--yellow-soft);
-  color: var(--yellow-deep);
-  padding: 2px 8px;
-  border-radius: 4px;
-  margin-right: 8px;
-  font-family: var(--font-en);
-  font-weight: 600;
-}
-.slide.dark .proc-tag,
-.slide.gradient .proc-tag { background: rgba(242,187,19,0.15); color: var(--yellow); }
+.proc-row:nth-child(2) .proc-num { background: var(--orange); color: white; }
+.proc-row:nth-child(3) .proc-num { background: var(--blue); color: white; }
+.proc-row:nth-child(4) .proc-num { background: var(--purple); color: white; }
+.proc-row:nth-child(5) .proc-num { background: var(--orange); color: white; }
+.proc-row:nth-child(6) .proc-num { background: var(--yellow); color: var(--ink); }
+.proc-title { font-size: clamp(14px, 1.2vw, 17px); font-weight: 700; color: white; margin-bottom: 4px; }
+.proc-text { font-size: 13px; color: rgba(255,255,255,0.72); line-height: 1.6; }
 
 /* ========= Reports grid ========= */
 .reports-grid {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 12px;
-  margin-top: 24px;
+  display: grid; grid-template-columns: repeat(4, 1fr);
+  gap: 12px; margin-top: 20px;
 }
 .rep-tile {
   background: white;
   padding: 14px 16px;
-  border-radius: 8px;
-  border: 1px solid var(--gray-200);
+  border-radius: 10px;
   display: flex; gap: 10px; align-items: center;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+  transition: all 0.25s var(--ease);
 }
-.slide.dark .rep-tile,
-.slide.gradient .rep-tile {
-  background: rgba(255,255,255,0.04);
-  border-color: rgba(255,255,255,0.08);
-}
+.rep-tile:hover { transform: translateY(-2px); box-shadow: 0 6px 18px rgba(0,0,0,0.08); }
 .rep-num {
   width: 28px; height: 28px;
-  background: var(--yellow-soft);
-  color: var(--yellow-deep);
+  background: var(--blue-soft); color: var(--blue);
   border-radius: 6px;
   display: flex; align-items: center; justify-content: center;
   font-weight: 800; font-size: 12px;
-  flex-shrink: 0;
-  font-family: var(--font-en);
+  flex-shrink: 0; font-family: var(--font-en);
 }
-.slide.dark .rep-num,
-.slide.gradient .rep-num { background: rgba(242,187,19,0.15); color: var(--yellow); }
-.rep-text { font-size: 12px; font-weight: 600; line-height: 1.4; color: var(--dark); }
-.slide.dark .rep-text,
-.slide.gradient .rep-text { color: white; }
-.rep-tile.featured {
-  background: var(--yellow);
-  color: var(--dark);
-  border-color: var(--yellow-deep);
-}
-.rep-tile.featured .rep-num { background: var(--dark); color: var(--yellow); }
-.rep-tile.featured .rep-text { color: var(--dark); }
+.rep-text { font-size: 12px; font-weight: 600; line-height: 1.4; color: var(--ink); }
+.rep-tile.featured { background: linear-gradient(135deg, var(--yellow) 0%, var(--orange) 100%); }
+.rep-tile.featured .rep-num { background: var(--purple); color: white; }
+.rep-tile.featured .rep-text { color: var(--ink); }
 
 /* ========= Pricing ========= */
 .pricing-card {
   background: white;
-  border: 1px solid var(--gray-200);
-  border-radius: 20px;
+  border-radius: 24px;
   padding: clamp(28px, 3vw, 44px);
-  max-width: 720px;
-  margin: 0 auto;
+  max-width: 760px; margin: 0 auto;
+  box-shadow: 0 12px 48px rgba(112,32,132,0.10);
+  border-top: 6px solid var(--yellow);
 }
 .pricing-row {
   display: flex; justify-content: space-between; align-items: center;
   padding: 14px 0;
-  border-bottom: 1px solid var(--gray-200);
+  border-bottom: 1px solid var(--line);
   font-size: clamp(14px, 1.2vw, 17px);
 }
 .pricing-row:last-of-type { border-bottom: none; }
 .pricing-row.total {
-  background: var(--yellow);
+  background: linear-gradient(135deg, var(--yellow) 0%, var(--orange) 100%);
   margin: 16px -28px -28px;
-  padding: 20px 28px;
-  border-radius: 0 0 20px 20px;
-  font-size: clamp(17px, 1.4vw, 22px);
-  font-weight: 700;
+  padding: 22px 28px;
+  border-radius: 0 0 18px 18px;
+  font-size: clamp(17px, 1.4vw, 22px); font-weight: 800;
+  color: var(--ink);
 }
 .pricing-num {
-  font-family: var(--font-en);
-  font-weight: 700;
+  font-family: var(--font-en); font-weight: 700;
   font-variant-numeric: tabular-nums;
 }
-.pricing-strike {
-  text-decoration: line-through;
-  color: var(--gray-500);
-  font-size: 0.85em;
-  margin-left: 8px;
+.pricing-strike { text-decoration: line-through; color: var(--ink-mute); font-size: 0.85em; margin-left: 8px; }
+
+/* ========= Sub-brand logos slide ========= */
+.brands-grid {
+  display: grid; grid-template-columns: repeat(4, 1fr);
+  gap: clamp(16px, 2vw, 32px);
+  margin-top: 4vh;
+}
+.brand-tile {
+  background: white;
+  border-radius: 18px;
+  padding: clamp(20px, 2vw, 32px);
+  text-align: center;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.04);
+  transition: transform 0.3s var(--ease), box-shadow 0.3s var(--ease);
+  position: relative;
+}
+.brand-tile:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 16px 40px rgba(112,32,132,0.12);
+}
+.brand-tile-img {
+  width: 100%; height: clamp(120px, 12vw, 160px);
+  display: flex; align-items: center; justify-content: center;
+  margin-bottom: 16px;
+}
+.brand-tile-img img {
+  max-width: 100%; max-height: 100%; object-fit: contain;
+}
+.brand-tile-name { font-size: clamp(14px, 1.2vw, 18px); font-weight: 700; color: var(--ink); margin-bottom: 4px; }
+.brand-tile-desc { font-size: 12px; color: var(--ink-soft); line-height: 1.5; }
+.brand-tile-tag {
+  display: inline-block; font-family: var(--font-en);
+  font-size: 10px; letter-spacing: 1.5px; font-weight: 700;
+  background: var(--yellow); color: var(--ink);
+  padding: 3px 10px; border-radius: 99px; margin-bottom: 12px;
 }
 
 /* ========= Closing slide CTA ========= */
 .closing-cta {
   display: flex; flex-direction: column;
-  align-items: flex-start;
-  justify-content: center;
-  gap: 32px;
-  flex: 1;
+  align-items: flex-start; justify-content: center;
+  gap: 32px; flex: 1;
 }
 .closing-h {
   font-size: clamp(40px, 5vw, 72px);
-  font-weight: 900;
-  line-height: 1.1;
-  color: white;
-  letter-spacing: -1px;
+  font-weight: 900; line-height: 1.1;
+  color: white; letter-spacing: -1px;
 }
 .closing-h span { color: var(--yellow); }
 .contact-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 24px;
-  width: 100%;
-  max-width: 900px;
+  display: grid; grid-template-columns: repeat(3, 1fr);
+  gap: 24px; width: 100%; max-width: 900px;
 }
 .contact-item {
-  background: rgba(255,255,255,0.04);
-  border: 1px solid rgba(255,255,255,0.1);
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(255,255,255,0.12);
   padding: 24px;
-  border-radius: 12px;
+  border-radius: 14px;
+  transition: all 0.3s var(--ease);
+}
+.contact-item:hover {
+  background: rgba(255,255,255,0.10);
+  border-color: var(--yellow);
+  transform: translateY(-3px);
 }
 .contact-label {
-  font-family: var(--font-en);
-  font-size: 11px;
-  letter-spacing: 2px;
-  font-weight: 700;
-  text-transform: uppercase;
-  color: rgba(255,255,255,0.5);
+  font-family: var(--font-en); font-size: 11px;
+  letter-spacing: 2px; font-weight: 700;
+  text-transform: uppercase; color: var(--yellow);
   margin-bottom: 8px;
 }
 .contact-value { font-size: 16px; color: white; font-weight: 600; }
 .contact-value.font-en { font-family: var(--font-en); }
 
-/* ========= Navigation Controls ========= */
+/* ========= Navigation ========= */
 .deck-nav {
-  position: fixed;
-  bottom: 24px; left: 50%;
+  position: fixed; bottom: 24px; left: 50%;
   transform: translateX(-50%);
   display: flex; align-items: center; gap: 12px;
-  background: rgba(15,23,42,0.85);
-  backdrop-filter: blur(8px);
-  border-radius: 99px;
-  padding: 8px 14px;
-  z-index: 100;
+  background: rgba(15,10,30,0.85); backdrop-filter: blur(12px);
+  border-radius: 99px; padding: 8px 14px; z-index: 100;
   font-family: var(--font-en);
+  border: 1px solid rgba(255,255,255,0.1);
 }
 .nav-btn {
-  width: 32px; height: 32px;
-  border-radius: 50%;
-  background: rgba(255,255,255,0.1);
-  border: none;
-  color: white;
-  cursor: pointer;
+  width: 36px; height: 36px; border-radius: 50%;
+  background: rgba(255,255,255,0.1); border: none;
+  color: white; cursor: pointer;
   display: flex; align-items: center; justify-content: center;
-  transition: background 0.15s;
-  font-size: 14px;
+  transition: all 0.2s var(--ease); font-size: 14px;
 }
-.nav-btn:hover { background: var(--yellow); color: var(--dark); }
+.nav-btn:hover { background: var(--yellow); color: var(--ink); transform: scale(1.05); }
 .nav-btn:disabled { opacity: 0.3; cursor: not-allowed; }
-.nav-counter {
-  color: white;
-  font-size: 13px;
-  font-weight: 600;
-  min-width: 60px;
-  text-align: center;
-}
+.nav-btn:disabled:hover { background: rgba(255,255,255,0.1); color: white; transform: none; }
+.nav-counter { color: white; font-size: 13px; font-weight: 600; min-width: 60px; text-align: center; }
 .nav-counter span { color: var(--yellow); }
 .nav-tools {
   display: flex; align-items: center; gap: 6px;
   border-right: 1px solid rgba(255,255,255,0.15);
-  padding-right: 12px;
-  margin-right: 6px;
+  padding-right: 12px; margin-right: 6px;
 }
-.nav-fullscreen, .nav-print, .nav-overview {
-  background: transparent;
-  border: none;
-  color: rgba(255,255,255,0.6);
-  cursor: pointer;
-  padding: 6px 8px;
-  border-radius: 6px;
-  font-size: 12px;
+.nav-tools button {
+  background: transparent; border: none;
+  color: rgba(255,255,255,0.6); cursor: pointer;
+  padding: 8px 10px; border-radius: 8px; font-size: 14px;
   transition: all 0.15s;
 }
-.nav-fullscreen:hover, .nav-print:hover, .nav-overview:hover {
-  background: rgba(255,255,255,0.1);
-  color: white;
-}
+.nav-tools button:hover { background: rgba(255,255,255,0.10); color: white; }
 
 /* ========= Progress Bar ========= */
 .deck-progress {
-  position: fixed;
-  top: 0; right: 0; left: 0;
-  height: 3px;
-  background: rgba(0,0,0,0.05);
-  z-index: 50;
+  position: fixed; top: 0; right: 0; left: 0;
+  height: 3px; background: rgba(0,0,0,0.05); z-index: 50;
 }
 .deck-progress-fill {
   height: 100%;
-  background: var(--yellow);
+  background: linear-gradient(90deg, var(--blue) 0%, var(--purple) 50%, var(--yellow) 100%);
   width: 0%;
-  transition: width 0.3s ease;
+  transition: width 0.5s var(--ease);
 }
 
 /* ========= Overview Mode ========= */
 body.overview-mode { overflow: auto; }
 body.overview-mode .deck {
-  position: relative;
-  height: auto;
-  min-height: 100vh;
-  background: var(--dark);
-  padding: 24px;
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-  gap: 16px;
+  position: relative; height: auto; min-height: 100vh;
+  background: var(--purple-dark); padding: 24px;
+  display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 16px;
 }
 body.overview-mode .slide {
-  position: relative;
-  display: flex !important;
-  width: 100%;
-  height: 200px;
-  padding: 16px;
-  border-radius: 8px;
-  cursor: pointer;
-  transform: scale(1);
-  font-size: 0.4em;
-  overflow: hidden;
+  position: relative; display: flex !important;
+  width: 100%; height: 200px; padding: 16px;
+  border-radius: 10px; cursor: pointer;
+  font-size: 0.4em; overflow: hidden;
+  border: 2px solid transparent; transition: all 0.2s;
 }
-body.overview-mode .slide:hover { outline: 3px solid var(--yellow); }
+body.overview-mode .slide:hover { border-color: var(--yellow); transform: scale(1.02); }
 body.overview-mode .deck-nav,
 body.overview-mode .deck-progress { display: none; }
 
-/* ========= Print Styles ========= */
-@page {
-  size: A4 landscape;
-  margin: 0;
-}
-
+/* ========= Print ========= */
+@page { size: A4 landscape; margin: 0; }
 @media print {
   html, body { overflow: visible; height: auto; }
   body { background: white; }
   .deck { width: auto; height: auto; }
   .slide {
-    display: flex !important;
-    flex-direction: column !important;
-    page-break-after: always;
-    page-break-inside: avoid;
-    width: 297mm;
-    height: 210mm;
-    padding: 14mm 18mm;
-    position: relative;
-    overflow: hidden;
+    display: flex !important; flex-direction: column !important;
+    page-break-after: always; page-break-inside: avoid;
+    width: 297mm; height: 210mm; padding: 14mm 18mm;
+    position: relative; overflow: hidden;
   }
   .slide.active { display: flex !important; }
   .deck-nav, .deck-progress { display: none !important; }
+  /* Force animations to "completed" state for print */
+  .bar-fill { width: var(--w) !important; }
+  .year-bar { height: var(--h) !important; }
+  .donut-progress { stroke-dashoffset: var(--offset) !important; }
+  .reveal, .reveal-fade, .reveal-scale { animation: none !important; opacity: 1 !important; transform: none !important; }
   * { -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important; }
 }
 
@@ -1025,7 +1068,6 @@ body.overview-mode .deck-progress { display: none; }
 @media (max-width: 760px) {
   .slide { padding: 4vh 5vw; }
   .stats-row { grid-template-columns: 1fr; gap: 16px; }
-  .two-col { grid-template-columns: 1fr; gap: 24px; }
   .pain-grid { grid-template-columns: 1fr; }
   .dept-grid { grid-template-columns: 1fr; }
   .team-grid { grid-template-columns: repeat(2, 1fr); }
@@ -1035,6 +1077,7 @@ body.overview-mode .deck-progress { display: none; }
   .contact-grid { grid-template-columns: 1fr; }
   .funnel-stage { grid-template-columns: 50px 1fr; }
   .funnel-stage > :nth-child(3) { display: none; }
+  .brands-grid { grid-template-columns: repeat(2, 1fr); }
 }
 </style>
 </head>
@@ -1044,23 +1087,30 @@ body.overview-mode .deck-progress { display: none; }
 
 <div class="deck" id="deck">
 
-<!-- ========================================================== -->
-<!-- SLIDE 1: COVER -->
-<!-- ========================================================== -->
+<!-- ===== SLIDE 1: COVER ===== -->
 <section class="slide cover-bg dark active">
+  <div class="cover-dots">
+    <div class="cover-dot" style="top:8%; left:5%; width:14px; height:14px; background:var(--yellow); animation-delay:0s;"></div>
+    <div class="cover-dot" style="top:15%; left:18%; width:10px; height:10px; background:var(--blue); animation-delay:1s;"></div>
+    <div class="cover-dot" style="top:78%; left:8%; width:18px; height:18px; background:var(--purple); animation-delay:2s;"></div>
+    <div class="cover-dot" style="top:25%; left:88%; width:12px; height:12px; background:var(--orange); animation-delay:1.5s;"></div>
+    <div class="cover-dot" style="top:65%; left:92%; width:8px; height:8px; background:var(--yellow); animation-delay:0.5s;"></div>
+    <div class="cover-dot" style="top:88%; left:78%; width:14px; height:14px; background:var(--purple); animation-delay:2.5s;"></div>
+  </div>
+
   <div class="cover-content">
-    <div class="cover-mark">
-      <div class="brand-logo">ك</div>
+    <div class="cover-mark reveal reveal-1">
+      <div class="cover-mark-img"><img src="../assets/img/cashclinic-logo.webp" alt="Cash Clinic"></div>
       <div>
         <div class="cover-brand-name">كاش كلينيك</div>
         <div class="cover-brand-en">CASH CLINIC</div>
       </div>
     </div>
-    <h1 class="cover-headline">من الاعتمادية<br>إلى <span>الحرية المالية</span>.</h1>
-    <p class="cover-tag">
+    <h1 class="cover-headline reveal reveal-2">من الاعتمادية<br>إلى <span>الحرية المالية</span>.</h1>
+    <p class="cover-tag reveal reveal-3">
       البيت الاستشاري المتخصص للعائلة الخليجية ورواد الأعمال – نُنظّم الأموال ونقود الأفراد إلى الحرية والوفرة المالية الحقيقية.
     </p>
-    <div class="cover-meta">
+    <div class="cover-meta reveal reveal-4">
       <span>COMPANY PROFILE <strong>·</strong> PITCH DECK</span>
       <span><strong>2026</strong></span>
       <span>KUWAIT <strong>·</strong> GCC</span>
@@ -1068,199 +1118,192 @@ body.overview-mode .deck-progress { display: none; }
   </div>
 </section>
 
-<!-- ========================================================== -->
-<!-- SLIDE 2: ABOUT US -->
-<!-- ========================================================== -->
+<!-- ===== SLIDE 2: ABOUT US ===== -->
 <section class="slide">
   <div class="slide-header">
-    <div class="slide-brand"><div class="slide-brand-mark">ك</div><div class="slide-brand-text">كاش كلينيك</div></div>
+    <div class="slide-brand"><div class="slide-brand-mark"><img src="../assets/img/cashclinic-logo.webp" alt=""></div><div class="slide-brand-text">كاش كلينيك<small>CASH CLINIC</small></div></div>
     <div class="slide-meta">ABOUT US</div>
   </div>
   <div class="slide-body">
-    <div class="eyebrow">من نحن</div>
-    <h2 class="title-h1">ليست عيادة، وليست تطبيقًا.<br><span class="highlight-yellow">منظومة استشارات مالية متكاملة.</span></h2>
-    <p class="lead" style="margin-top: 24px;">
+    <div class="eyebrow reveal reveal-1">من نحن</div>
+    <h2 class="title-h1 reveal reveal-2">ليست عيادة، وليست تطبيقًا.<br><span class="h-yellow">منظومة استشارات مالية متكاملة.</span></h2>
+    <p class="lead reveal reveal-3" style="margin-top: 24px;">
       كاش كلينيك بيت استشاري متخصص يخدم شريحتين محددتين: <strong>العائلة الخليجية</strong> الواعية التي تريد تنظيم ماليّتها بمنهج محترف، و<strong>رواد الأعمال</strong> الذين يحتاجون إدارة احترافية للكاش في مراحل النمو والأزمات.
     </p>
-    <p class="lead" style="margin-top: 16px;">
+    <p class="lead reveal reveal-4" style="margin-top: 16px;">
       نُسد فجوة حقيقية في السوق الخليجي بين البنوك (مجانية لكن متحيّزة)، والمدرّبين (محتوى عام)، والمستشارين المرخّصين (للأثرياء فقط). هذي الفجوة هي مكاننا الطبيعي.
     </p>
   </div>
   <div class="slide-footer"><div>Cash Clinic Company Profile · 2026</div><div class="slide-page">02</div></div>
 </section>
 
-<!-- ========================================================== -->
-<!-- SLIDE 3: VISION -->
-<!-- ========================================================== -->
+<!-- ===== SLIDE 3: VISION ===== -->
 <section class="slide yellow">
   <div class="slide-header">
-    <div class="slide-brand"><div class="slide-brand-mark" style="background:var(--dark); color:var(--yellow);">ك</div><div class="slide-brand-text">كاش كلينيك</div></div>
+    <div class="slide-brand"><div class="slide-brand-mark"><img src="../assets/img/cashclinic-logo.webp" alt=""></div><div class="slide-brand-text">كاش كلينيك<small>CASH CLINIC</small></div></div>
     <div class="slide-meta">OUR VISION</div>
   </div>
   <div class="slide-body" style="justify-content: center;">
-    <div class="eyebrow" style="color: var(--dark);">رؤيتنا</div>
-    <h2 class="title-h1" style="font-size: clamp(48px, 6.5vw, 88px);">
+    <div class="eyebrow reveal reveal-1" style="color: var(--purple);">رؤيتنا</div>
+    <h2 class="title-h1 reveal reveal-2" style="font-size: clamp(48px, 6.5vw, 88px);">
       الحرية المالية<br>والوفرة المالية.
     </h2>
-    <p class="lead" style="color: var(--dark); max-width: 1000px; margin-top: 32px; font-size: clamp(18px, 1.7vw, 24px);">
+    <p class="lead reveal reveal-3" style="color: var(--ink); max-width: 1000px; margin-top: 32px; font-size: clamp(18px, 1.7vw, 24px);">
       ليس ثراءً بمعنى تكديس المال – بل وصول كل عميل إلى مرحلة <strong>دخله أعلى من مصاريفه</strong>، يقدر يتعامل مع المفاجآت <strong>(سيارة تتعطل، مرض، أي ظرف طارئ)</strong> دون أن يضطر للتنازل عن أساسيات حياته أو عائلته.
     </p>
   </div>
-  <div class="slide-footer" style="color: rgba(0,0,0,0.55); border-top-color: rgba(0,0,0,0.1);"><div>Financial Freedom · Financial Abundance</div><div class="slide-page">03</div></div>
+  <div class="slide-footer" style="color: rgba(0,0,0,0.5); border-top-color: rgba(0,0,0,0.1);"><div>Financial Freedom · Financial Abundance</div><div class="slide-page">03</div></div>
 </section>
 
-<!-- ========================================================== -->
-<!-- SLIDE 4: TRACK RECORD - HERO NUMBERS -->
-<!-- ========================================================== -->
-<section class="slide gradient">
+<!-- ===== SLIDE 4: TRACK RECORD ===== -->
+<section class="slide purple-deep">
   <div class="slide-header">
-    <div class="slide-brand"><div class="slide-brand-mark">ك</div><div class="slide-brand-text" style="color:white;">كاش كلينيك</div></div>
+    <div class="slide-brand"><div class="slide-brand-mark"><img src="../assets/img/cashclinic-logo.webp" alt=""></div><div class="slide-brand-text">كاش كلينيك<small>CASH CLINIC</small></div></div>
     <div class="slide-meta">TRACK RECORD</div>
   </div>
   <div class="slide-body">
-    <div class="eyebrow">الأرقام التي بنيناها</div>
-    <h2 class="title-h2" style="color: white; margin-bottom: 5vh;">سجلّنا التراكمي عبر <span class="highlight-yellow">ثلاث سنوات من العمل</span>.</h2>
+    <div class="eyebrow reveal reveal-1">الأرقام التي بنيناها</div>
+    <h2 class="title-h2 reveal reveal-2" style="color: white; margin-bottom: 5vh;">سجلّنا التراكمي عبر <span class="h-yellow">ثلاث سنوات من العمل</span>.</h2>
 
     <div class="stats-row" style="margin-top: 4vh;">
-      <div class="big-stat">
-        <div class="big-stat-num">4,231</div>
+      <div class="big-stat reveal reveal-3">
+        <div class="big-stat-num" data-count="4231">0</div>
         <div class="big-stat-label">جلسة استشارية مالية</div>
       </div>
-      <div class="big-stat">
-        <div class="big-stat-num">6</div>
+      <div class="big-stat reveal reveal-4">
+        <div class="big-stat-num" data-count="6">0</div>
         <div class="big-stat-label">دول خليجية وصلت إليها خدماتنا</div>
       </div>
-      <div class="big-stat">
-        <div class="big-stat-num">3+</div>
+      <div class="big-stat reveal reveal-5">
+        <div class="big-stat-num" data-count="3" data-suffix="+">0</div>
         <div class="big-stat-label">سنوات من النمو المتراكم<br>(2023 – 2026)</div>
       </div>
     </div>
 
-    <p class="lead" style="margin-top: 5vh; color: rgba(255,255,255,0.7); font-size: 17px;">
+    <p class="lead reveal reveal-6" style="margin-top: 5vh; color: rgba(255,255,255,0.7); font-size: 17px;">
       كل رقم منهم يمثّل قصة حقيقية، عائلة استعادت السيطرة، رائد أعمال نجا من أزمة كاش، شخص خرج من دائرة الاعتمادية. هذي ليست أرقام تسويقية – هذي أثر فعلي.
     </p>
   </div>
   <div class="slide-footer"><div>Cumulative · 2023 – Q1 2026</div><div class="slide-page">04</div></div>
 </section>
 
-<!-- ========================================================== -->
-<!-- SLIDE 5: REACH BY COUNTRY -->
-<!-- ========================================================== -->
+<!-- ===== SLIDE 5: REACH BY COUNTRY (animated bars) ===== -->
 <section class="slide">
   <div class="slide-header">
-    <div class="slide-brand"><div class="slide-brand-mark">ك</div><div class="slide-brand-text">كاش كلينيك</div></div>
+    <div class="slide-brand"><div class="slide-brand-mark"><img src="../assets/img/cashclinic-logo.webp" alt=""></div><div class="slide-brand-text">كاش كلينيك<small>CASH CLINIC</small></div></div>
     <div class="slide-meta">SESSIONS BY COUNTRY</div>
   </div>
   <div class="slide-body">
-    <div class="eyebrow">انتشارنا الجغرافي</div>
-    <h2 class="title-h2">حضور قوي في الكويت، نمو نشط<br>في <span class="highlight-yellow">باقي دول الخليج</span>.</h2>
+    <div class="eyebrow reveal reveal-1">انتشارنا الجغرافي</div>
+    <h2 class="title-h2 reveal reveal-2">حضور قوي في الكويت، نمو نشط<br>في <span class="h-blue">باقي دول الخليج</span>.</h2>
 
-    <div class="bar-chart" style="margin-top: 5vh; max-width: 1100px;">
+    <div class="bar-chart reveal-fade" style="margin-top: 5vh; max-width: 1100px;">
       <div class="bar-row">
-        <div class="bar-label">🇰🇼 الكويت</div>
-        <div class="bar-track"><div class="bar-fill" style="width: 100%;"></div></div>
+        <div class="bar-label"><span class="bar-flag">🇰🇼</span><span>الكويت</span></div>
+        <div class="bar-track"><div class="bar-fill c-yellow" style="--w:100%; --d:0.0s;"></div></div>
         <div class="bar-num">2,750</div>
         <div class="bar-pct">65%</div>
       </div>
       <div class="bar-row">
-        <div class="bar-label">🇸🇦 السعودية</div>
-        <div class="bar-track"><div class="bar-fill" style="width: 18.5%;"></div></div>
+        <div class="bar-label"><span class="bar-flag">🇸🇦</span><span>السعودية</span></div>
+        <div class="bar-track"><div class="bar-fill c-blue" style="--w:18.5%; --d:0.15s;"></div></div>
         <div class="bar-num">508</div>
         <div class="bar-pct">12%</div>
       </div>
       <div class="bar-row">
-        <div class="bar-label">🇦🇪 الإمارات</div>
-        <div class="bar-track"><div class="bar-fill" style="width: 15.4%;"></div></div>
+        <div class="bar-label"><span class="bar-flag">🇦🇪</span><span>الإمارات</span></div>
+        <div class="bar-track"><div class="bar-fill c-orange" style="--w:15.4%; --d:0.30s;"></div></div>
         <div class="bar-num">423</div>
         <div class="bar-pct">10%</div>
       </div>
       <div class="bar-row">
-        <div class="bar-label">🇶🇦 قطر</div>
-        <div class="bar-track"><div class="bar-fill" style="width: 10.8%;"></div></div>
+        <div class="bar-label"><span class="bar-flag">🇶🇦</span><span>قطر</span></div>
+        <div class="bar-track"><div class="bar-fill c-purple" style="--w:10.8%; --d:0.45s;"></div></div>
         <div class="bar-num">296</div>
         <div class="bar-pct">7%</div>
       </div>
       <div class="bar-row">
-        <div class="bar-label">🇧🇭 البحرين</div>
-        <div class="bar-track"><div class="bar-fill" style="width: 6.2%;"></div></div>
+        <div class="bar-label"><span class="bar-flag">🇧🇭</span><span>البحرين</span></div>
+        <div class="bar-track"><div class="bar-fill c-yellow" style="--w:6.2%; --d:0.60s; opacity:0.7;"></div></div>
         <div class="bar-num">169</div>
         <div class="bar-pct">4%</div>
       </div>
       <div class="bar-row">
-        <div class="bar-label">🇴🇲 عُمان</div>
-        <div class="bar-track"><div class="bar-fill" style="width: 3.1%;"></div></div>
+        <div class="bar-label"><span class="bar-flag">🇴🇲</span><span>عُمان</span></div>
+        <div class="bar-track"><div class="bar-fill c-blue" style="--w:3.1%; --d:0.75s; opacity:0.7;"></div></div>
         <div class="bar-num">85</div>
         <div class="bar-pct">2%</div>
       </div>
     </div>
 
-    <p style="margin-top: 32px; font-size: 15px; color: var(--gray-600); font-style: italic;">
+    <p class="reveal reveal-3" style="margin-top: 32px; font-size: 15px; color: var(--ink-soft); font-style: italic;">
       إجمالي ٤٬٢٣١ جلسة موزّعة على دول مجلس التعاون الخليجي – الكويت تشكّل الأساس، والسعودية والإمارات يمثّلان ٢٢٪ من النشاط.
     </p>
   </div>
   <div class="slide-footer"><div>Regional Distribution</div><div class="slide-page">05</div></div>
 </section>
 
-<!-- ========================================================== -->
-<!-- SLIDE 6: GROWTH TRAJECTORY -->
-<!-- ========================================================== -->
+<!-- ===== SLIDE 6: GROWTH TRAJECTORY (animated bars) ===== -->
 <section class="slide">
   <div class="slide-header">
-    <div class="slide-brand"><div class="slide-brand-mark">ك</div><div class="slide-brand-text">كاش كلينيك</div></div>
+    <div class="slide-brand"><div class="slide-brand-mark"><img src="../assets/img/cashclinic-logo.webp" alt=""></div><div class="slide-brand-text">كاش كلينيك<small>CASH CLINIC</small></div></div>
     <div class="slide-meta">GROWTH TRAJECTORY</div>
   </div>
   <div class="slide-body">
-    <div class="eyebrow">مسار النمو</div>
-    <h2 class="title-h2">من <span class="highlight-yellow">٣٤٢ جلسة</span> إلى <span class="highlight-yellow">٢٬٧٨٩</span> – نموّ ٨× خلال سنتين.</h2>
+    <div class="eyebrow reveal reveal-1">مسار النمو</div>
+    <h2 class="title-h2 reveal reveal-2">من <span class="h-blue">٣٤٢ جلسة</span> إلى <span class="h-yellow">٢٬٧٨٩</span> – نموّ <span class="h-orange">٨×</span> خلال سنتين.</h2>
 
-    <div class="year-chart">
+    <div class="year-chart reveal-fade">
       <div class="year-col">
-        <div class="year-bar" style="height: 12%;">342</div>
+        <div class="year-bar b-blue" style="--h:12%; --d:0.0s;">342</div>
         <div class="year-label">2023</div>
         <div class="year-sublabel">٤ أشهر فقط</div>
       </div>
       <div class="year-col">
-        <div class="year-bar" style="height: 38%;">1,050</div>
+        <div class="year-bar b-orange" style="--h:38%; --d:0.20s;">1,050</div>
         <div class="year-label">2024</div>
         <div class="year-sublabel">سنة كاملة</div>
       </div>
       <div class="year-col">
-        <div class="year-bar" style="height: 100%;">2,789</div>
+        <div class="year-bar b-yellow" style="--h:100%; --d:0.40s;">2,789</div>
         <div class="year-label">2025</div>
         <div class="year-sublabel">سنة كاملة</div>
       </div>
       <div class="year-col">
-        <div class="year-bar" style="height: 22%; background: linear-gradient(180deg, rgba(242,187,19,0.5) 0%, rgba(242,187,19,0.7) 100%);">~600</div>
+        <div class="year-bar b-purple" style="--h:22%; --d:0.60s;">~600</div>
         <div class="year-label">2026 (متوقع)</div>
         <div class="year-sublabel">~٥٠ جلسة شهريًا مستدامة</div>
       </div>
     </div>
 
-    <p style="margin-top: 24px; font-size: 15px; color: var(--gray-600); font-style: italic;">
+    <p class="reveal reveal-3" style="margin-top: 24px; font-size: 15px; color: var(--ink-soft); font-style: italic;">
       ٢٠٢٦ نقطة تحوّل: انتقلنا من «بيع الوقت» إلى منظومة منتجات (محتوى مجاني → اختبار تشخيصي → منتج رقمي → دورات → استشارة فردية).
     </p>
   </div>
   <div class="slide-footer"><div>Annual Sessions Growth</div><div class="slide-page">06</div></div>
 </section>
 
-<!-- ========================================================== -->
-<!-- SLIDE 7: BY CHANNEL -->
-<!-- ========================================================== -->
+<!-- ===== SLIDE 7: BY CHANNEL (animated donut) ===== -->
 <section class="slide yellow-soft">
   <div class="slide-header">
-    <div class="slide-brand"><div class="slide-brand-mark">ك</div><div class="slide-brand-text">كاش كلينيك</div></div>
+    <div class="slide-brand"><div class="slide-brand-mark"><img src="../assets/img/cashclinic-logo.webp" alt=""></div><div class="slide-brand-text">كاش كلينيك<small>CASH CLINIC</small></div></div>
     <div class="slide-meta">DELIVERY CHANNELS</div>
   </div>
   <div class="slide-body">
-    <div class="eyebrow">قنوات التواصل</div>
-    <h2 class="title-h2">حضور مباشر مع <span class="highlight-yellow">٧٠٪</span> من العملاء.</h2>
+    <div class="eyebrow reveal reveal-1">قنوات التواصل</div>
+    <h2 class="title-h2 reveal reveal-2">حضور مباشر مع <span class="h-purple">٧٠٪</span> من العملاء.</h2>
 
-    <div class="donut-block" style="margin-top: 5vh;">
+    <div class="donut-block reveal-scale" style="margin-top: 5vh;">
       <div class="donut">
         <svg viewBox="0 0 100 100">
-          <circle cx="50" cy="50" r="40" stroke="#FCEAB6" stroke-width="14" fill="none"/>
-          <circle cx="50" cy="50" r="40" stroke="var(--yellow-deep)" stroke-width="14" fill="none"
-                  stroke-dasharray="175.93 251.33" stroke-linecap="butt" stroke-dashoffset="0"/>
+          <circle class="donut-track" cx="50" cy="50" r="40"/>
+          <circle class="donut-progress" cx="50" cy="50" r="40" stroke="url(#donutGrad)" style="--offset:75.4;"/>
+          <defs>
+            <linearGradient id="donutGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stop-color="#702084"/>
+              <stop offset="100%" stop-color="#2578C4"/>
+            </linearGradient>
+          </defs>
         </svg>
         <div class="donut-center">
           <div class="donut-center-num">4,231</div>
@@ -1269,20 +1312,20 @@ body.overview-mode .deck-progress { display: none; }
       </div>
       <div class="donut-legend">
         <div class="donut-item">
-          <div class="donut-dot" style="background: var(--yellow-deep);"></div>
+          <div class="donut-dot" style="background: linear-gradient(135deg, var(--purple) 0%, var(--blue) 100%);"></div>
           <div class="donut-item-text">
             <div class="donut-item-name">جلسات حضورية</div>
             <div class="donut-item-meta">2,962 جلسة · 70%</div>
           </div>
         </div>
         <div class="donut-item">
-          <div class="donut-dot" style="background: #FCEAB6;"></div>
+          <div class="donut-dot" style="background: rgba(112,32,132,0.18);"></div>
           <div class="donut-item-text">
             <div class="donut-item-name">جلسات أون لاين</div>
             <div class="donut-item-meta">1,269 جلسة · 30%</div>
           </div>
         </div>
-        <p style="font-size: 14px; color: var(--gray-700); max-width: 320px; margin-top: 16px; line-height: 1.7;">
+        <p style="font-size: 14px; color: var(--ink-soft); max-width: 320px; margin-top: 16px; line-height: 1.7;">
           المرونة بين الحضوري والإلكتروني تتيح لنا الوصول للعملاء داخل الكويت وخارجها، مع الحفاظ على نفس الجودة والسرّية.
         </p>
       </div>
@@ -1291,179 +1334,115 @@ body.overview-mode .deck-progress { display: none; }
   <div class="slide-footer" style="color: rgba(0,0,0,0.5); border-top-color: rgba(0,0,0,0.08);"><div>Channel Mix</div><div class="slide-page">07</div></div>
 </section>
 
-<!-- ========================================================== -->
-<!-- SLIDE 8: SECTION DIVIDER - PROBLEM -->
-<!-- ========================================================== -->
+<!-- ===== SLIDE 8: DIVIDER 01 - PROBLEM ===== -->
 <section class="slide dark section-divider">
   <div class="section-divider-num">01</div>
   <div class="section-divider-content slide-body">
-    <div class="eyebrow">القسم الأول</div>
-    <h2 class="title-h1" style="color: white;">المشكلة التي<br>نراها في السوق.</h2>
-    <p class="lead" style="margin-top: 24px;">لماذا المساعدة المالية وحدها لا تكفي.</p>
+    <div class="eyebrow reveal reveal-1">القسم الأول</div>
+    <h2 class="title-h1 reveal reveal-2" style="color: white;">المشكلة التي<br>نراها <span class="h-yellow">في السوق</span>.</h2>
+    <p class="lead reveal reveal-3" style="margin-top: 24px;">لماذا المساعدة المالية وحدها لا تكفي.</p>
   </div>
   <div class="slide-footer"><div>The Problem</div><div class="slide-page">08</div></div>
 </section>
 
-<!-- ========================================================== -->
-<!-- SLIDE 9: THE PROBLEM -->
-<!-- ========================================================== -->
+<!-- ===== SLIDE 9: THE PROBLEM ===== -->
 <section class="slide">
   <div class="slide-header">
-    <div class="slide-brand"><div class="slide-brand-mark">ك</div><div class="slide-brand-text">كاش كلينيك</div></div>
+    <div class="slide-brand"><div class="slide-brand-mark"><img src="../assets/img/cashclinic-logo.webp" alt=""></div><div class="slide-brand-text">كاش كلينيك<small>CASH CLINIC</small></div></div>
     <div class="slide-meta">THE PROBLEM</div>
   </div>
   <div class="slide-body">
-    <div class="eyebrow">المشكلة الجوهرية</div>
-    <h2 class="title-h2" style="margin-bottom: 4vh;">المساعدة المالية تحلّ الأزمة،<br><span class="highlight-yellow">لكنها لا تحلّ الأنماط التي صنعتها</span>.</h2>
+    <div class="eyebrow reveal reveal-1">المشكلة الجوهرية</div>
+    <h2 class="title-h2 reveal reveal-2" style="margin-bottom: 4vh;">المساعدة المالية تحلّ الأزمة،<br><span class="h-orange">لكنها لا تحلّ الأنماط التي صنعتها</span>.</h2>
 
     <div class="pain-grid">
-      <div class="pain-card">
-        <div class="pain-num">PAIN 01</div>
-        <h3 class="pain-h">دائرة الاعتمادية المزمنة</h3>
-        <p class="pain-text">المستفيد يحصل على المساعدة، يتنفّس قليلًا، ثم يعود بعد ٦ أشهر بنفس المشكلة + ديون جديدة. الجمعية تُنفق، لكن السلوك المالي لم يتغيّر.</p>
-      </div>
-      <div class="pain-card">
-        <div class="pain-num">PAIN 02</div>
-        <h3 class="pain-h">غياب القياس الحقيقي للأثر</h3>
-        <p class="pain-text">الجمعية تعرف كم أنفقت، لكن لا تعرف هل تحسّن وضع المستفيد فعلًا. لا توجد بيانات «قبل/بعد» تُترجم الإنفاق إلى أثر قابل للقياس.</p>
-      </div>
-      <div class="pain-card">
-        <div class="pain-num">PAIN 03</div>
-        <h3 class="pain-h">أنماط مالية متجذّرة</h3>
-        <p class="pain-text">الديون المتراكمة، الصرف الانفعالي، غياب الميزانية، أخذ قروض جديدة لسداد قديمة – كلّها أنماط لا تُحلّ بمبلغ، بل بإعادة بناء العلاقة مع المال.</p>
-      </div>
-      <div class="pain-card">
-        <div class="pain-num">PAIN 04</div>
-        <h3 class="pain-h">فجوة بين البنوك والمدرّبين والمستشارين</h3>
-        <p class="pain-text">البنوك مجانية لكن متحيّزة لمنتجاتها. المدرّبون يقدّمون محتوى عام. المستشارون المرخّصون للأثرياء فقط. الناس في الوسط بلا حلّ احترافي مناسب.</p>
-      </div>
+      <div class="pain-card reveal reveal-3"><div class="pain-num">PAIN 01</div><h3 class="pain-h">دائرة الاعتمادية المزمنة</h3><p class="pain-text">المستفيد يحصل على المساعدة، يتنفّس قليلًا، ثم يعود بعد ٦ أشهر بنفس المشكلة + ديون جديدة. الجمعية تُنفق، لكن السلوك المالي لم يتغيّر.</p></div>
+      <div class="pain-card reveal reveal-4"><div class="pain-num">PAIN 02</div><h3 class="pain-h">غياب القياس الحقيقي للأثر</h3><p class="pain-text">الجمعية تعرف كم أنفقت، لكن لا تعرف هل تحسّن وضع المستفيد فعلًا. لا توجد بيانات «قبل/بعد» تُترجم الإنفاق إلى أثر قابل للقياس.</p></div>
+      <div class="pain-card reveal reveal-5"><div class="pain-num">PAIN 03</div><h3 class="pain-h">أنماط مالية متجذّرة</h3><p class="pain-text">الديون المتراكمة، الصرف الانفعالي، غياب الميزانية، أخذ قروض جديدة لسداد قديمة – كلّها أنماط لا تُحلّ بمبلغ، بل بإعادة بناء العلاقة مع المال.</p></div>
+      <div class="pain-card reveal reveal-6"><div class="pain-num">PAIN 04</div><h3 class="pain-h">فجوة بين البنوك والمدرّبين والمستشارين</h3><p class="pain-text">البنوك مجانية لكن متحيّزة لمنتجاتها. المدرّبون يقدّمون محتوى عام. المستشارون المرخّصون للأثرياء فقط. الناس في الوسط بلا حلّ احترافي مناسب.</p></div>
     </div>
   </div>
   <div class="slide-footer"><div>Market Pain Points</div><div class="slide-page">09</div></div>
 </section>
 
-<!-- ========================================================== -->
-<!-- SLIDE 10: SECTION DIVIDER - SOLUTION -->
-<!-- ========================================================== -->
-<section class="slide gradient section-divider">
+<!-- ===== SLIDE 10: DIVIDER 02 - SOLUTION ===== -->
+<section class="slide purple-deep section-divider">
   <div class="section-divider-num">02</div>
   <div class="section-divider-content slide-body">
-    <div class="eyebrow">القسم الثاني</div>
-    <h2 class="title-h1" style="color: white;">حلّنا.<br><span class="highlight-yellow">منظومة، لا منتج.</span></h2>
-    <p class="lead" style="margin-top: 24px;">كيف نُحوّل المعاناة المالية إلى استقلالية حقيقية.</p>
+    <div class="eyebrow reveal reveal-1">القسم الثاني</div>
+    <h2 class="title-h1 reveal reveal-2" style="color: white;">حلّنا.<br><span class="h-yellow">منظومة، لا منتج.</span></h2>
+    <p class="lead reveal reveal-3" style="margin-top: 24px;">كيف نُحوّل المعاناة المالية إلى استقلالية حقيقية.</p>
   </div>
   <div class="slide-footer"><div>The Solution</div><div class="slide-page">10</div></div>
 </section>
 
-<!-- ========================================================== -->
-<!-- SLIDE 11: METHODOLOGY - INVERTED FUNNEL -->
-<!-- ========================================================== -->
+<!-- ===== SLIDE 11: METHODOLOGY - INVERTED FUNNEL ===== -->
 <section class="slide">
   <div class="slide-header">
-    <div class="slide-brand"><div class="slide-brand-mark">ك</div><div class="slide-brand-text">كاش كلينيك</div></div>
+    <div class="slide-brand"><div class="slide-brand-mark"><img src="../assets/img/cashclinic-logo.webp" alt=""></div><div class="slide-brand-text">كاش كلينيك<small>CASH CLINIC</small></div></div>
     <div class="slide-meta">METHODOLOGY</div>
   </div>
   <div class="slide-body">
-    <div class="eyebrow">منهجيتنا</div>
-    <h2 class="title-h2">الفنل المقلوب: من <span class="highlight-yellow">المحتوى المجاني</span> إلى <span class="highlight-yellow">الاستشارة كقمة</span>.</h2>
-    <p class="lead" style="margin-top: 12px; font-size: 16px;">العميل يدخل من المحتوى المجاني، يتدرّج عبر التشخيص والمنتج الرقمي والدورة، ليصل للاستشارة الفردية وهو مهيّأ تمامًا.</p>
+    <div class="eyebrow reveal reveal-1">منهجيتنا</div>
+    <h2 class="title-h2 reveal reveal-2">الفنل المقلوب: من <span class="h-blue">المحتوى المجاني</span> إلى <span class="h-purple">الاستشارة كقمة</span>.</h2>
+    <p class="lead reveal reveal-3" style="margin-top: 12px; font-size: 16px;">العميل يدخل من المحتوى المجاني، يتدرّج عبر التشخيص والمنتج الرقمي والدورة، ليصل للاستشارة الفردية وهو مهيّأ تمامًا.</p>
 
     <div class="funnel">
-      <div class="funnel-stage">
+      <div class="funnel-stage reveal reveal-4" data-color="blue">
         <div class="funnel-num">١</div>
-        <div>
-          <div class="funnel-label-h">المحتوى المجاني التخصصي</div>
-          <div class="funnel-label-sub">محتوى يومي يبني الوعي والثقة</div>
-        </div>
-        <div>
-          <div class="funnel-tier-tag">GATEWAY</div>
-          <div class="funnel-price">مجاني</div>
-        </div>
+        <div><div class="funnel-label-h">المحتوى المجاني التخصصي</div><div class="funnel-label-sub">محتوى يومي يبني الوعي والثقة</div></div>
+        <div><div class="funnel-tier-tag">GATEWAY</div><div class="funnel-price">مجاني</div></div>
       </div>
-      <div class="funnel-stage">
+      <div class="funnel-stage reveal reveal-5" data-color="orange">
         <div class="funnel-num">٢</div>
-        <div>
-          <div class="funnel-label-h">الاختبار التشخيصي المجاني</div>
-          <div class="funnel-label-sub">يفرز العميل ويوجّهه لقسمه المناسب</div>
-        </div>
-        <div>
-          <div class="funnel-tier-tag">FILTER</div>
-          <div class="funnel-price">مجاني</div>
-        </div>
+        <div><div class="funnel-label-h">الاختبار التشخيصي المجاني</div><div class="funnel-label-sub">يفرز العميل ويوجّهه لقسمه المناسب</div></div>
+        <div><div class="funnel-tier-tag">FILTER</div><div class="funnel-price">مجاني</div></div>
       </div>
-      <div class="funnel-stage">
+      <div class="funnel-stage reveal reveal-6" data-color="yellow">
         <div class="funnel-num">٣</div>
-        <div>
-          <div class="funnel-label-h">المنتج الرقمي</div>
-          <div class="funnel-label-sub">دليل تخصصي – التزام مالي خفيف يبني الثقة</div>
-        </div>
-        <div>
-          <div class="funnel-tier-tag">FIRST COMMITMENT</div>
-          <div class="funnel-price">أقل من ١٠ د.ك</div>
-        </div>
+        <div><div class="funnel-label-h">المنتج الرقمي</div><div class="funnel-label-sub">دليل تخصصي – التزام مالي خفيف يبني الثقة</div></div>
+        <div><div class="funnel-tier-tag">FIRST COMMITMENT</div><div class="funnel-price">أقل من ١٠ د.ك</div></div>
       </div>
-      <div class="funnel-stage">
+      <div class="funnel-stage reveal reveal-7" data-color="orange">
         <div class="funnel-num">٤</div>
-        <div>
-          <div class="funnel-label-h">دورة «صناعة الوفرة المالية»</div>
-          <div class="funnel-label-sub">دورة جماعية مباشرة – ٣ أيام × ٣ ساعات، تتكرر شهريًا</div>
-        </div>
-        <div>
-          <div class="funnel-tier-tag">CONVERSION</div>
-          <div class="funnel-price">دورة جماعية</div>
-        </div>
+        <div><div class="funnel-label-h">دورة «صناعة الوفرة المالية»</div><div class="funnel-label-sub">دورة جماعية مباشرة – ٣ أيام × ٣ ساعات، تتكرر شهريًا</div></div>
+        <div><div class="funnel-tier-tag">CONVERSION</div><div class="funnel-price">دورة جماعية</div></div>
       </div>
-      <div class="funnel-stage" data-tier="5">
+      <div class="funnel-stage reveal reveal-8" data-color="purple" data-tier="peak">
         <div class="funnel-num">٥</div>
-        <div>
-          <div class="funnel-label-h">الاستشارة الفردية</div>
-          <div class="funnel-label-sub">قمة القيمة – عميل مهيّأ تمامًا، تحوّل واحد بدون تنازل عن السعر</div>
-        </div>
-        <div>
-          <div class="funnel-tier-tag">THE PEAK</div>
-          <div class="funnel-price">٣٠٠ د.ك</div>
-        </div>
+        <div><div class="funnel-label-h">الاستشارة الفردية</div><div class="funnel-label-sub">قمة القيمة – عميل مهيّأ تمامًا، تحوّل واحد بدون تنازل عن السعر</div></div>
+        <div><div class="funnel-tier-tag">THE PEAK</div><div class="funnel-price">٣٠٠ د.ك</div></div>
       </div>
     </div>
   </div>
   <div class="slide-footer"><div>Inverted Funnel · Approved Q2 2026</div><div class="slide-page">11</div></div>
 </section>
 
-<!-- ========================================================== -->
-<!-- SLIDE 12: TWO DEPARTMENTS -->
-<!-- ========================================================== -->
+<!-- ===== SLIDE 12: TWO DEPARTMENTS ===== -->
 <section class="slide">
   <div class="slide-header">
-    <div class="slide-brand"><div class="slide-brand-mark">ك</div><div class="slide-brand-text">كاش كلينيك</div></div>
+    <div class="slide-brand"><div class="slide-brand-mark"><img src="../assets/img/cashclinic-logo.webp" alt=""></div><div class="slide-brand-text">كاش كلينيك<small>CASH CLINIC</small></div></div>
     <div class="slide-meta">OUR DEPARTMENTS</div>
   </div>
   <div class="slide-body">
-    <div class="eyebrow">أقسامنا</div>
-    <h2 class="title-h2">قسمان متخصصان – <span class="highlight-yellow">شريحتان مختلفتان</span>، منهج واحد موحّد.</h2>
-    <p class="lead" style="margin-top: 12px; font-size: 16px; margin-bottom: 4vh;">بدلًا من مخاطبة الجميع، اخترنا أن نخدم شريحتين بعمق – العائلة الخليجية كوحدة، ورائد الأعمال في إدارة الكاش.</p>
+    <div class="eyebrow reveal reveal-1">أقسامنا</div>
+    <h2 class="title-h2 reveal reveal-2">قسمان متخصصان – <span class="h-yellow">شريحتان مختلفتان</span>، منهج واحد موحّد.</h2>
+    <p class="lead reveal reveal-3" style="margin-top: 12px; font-size: 16px; margin-bottom: 4vh;">بدلًا من مخاطبة الجميع، اخترنا أن نخدم شريحتين بعمق – العائلة الخليجية كوحدة، ورائد الأعمال في إدارة الكاش.</p>
 
     <div class="dept-grid">
-      <div class="dept-card">
-        <div class="dept-icon">
-          <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11h18M5 18l-2-7M19 18l2-7M7 18h10M9 11V7a3 3 0 116 0v4"/></svg>
-        </div>
+      <div class="dept-card family reveal reveal-4">
+        <div class="dept-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11h18M5 18l-2-7M19 18l2-7M7 18h10M9 11V7a3 3 0 116 0v4"/></svg></div>
         <h3 class="dept-name">قسم العائلة الخليجية</h3>
         <div class="dept-en">FAMILY SEGMENT</div>
-        <p class="dept-text">
-          نخاطب الزوج والزوجة كوحدة عائلية، لا كأفراد منفصلين. لأن ثقافة الاستشارة المالية في الخليج بطبيعتها عائلية، فلمّا نُخاطب العائلة بدل الفرد، السعر يصبح يستحق عند العميل، والقيمة تتوزّع على أكثر من شخص.
-        </p>
+        <p class="dept-text">نخاطب الزوج والزوجة كوحدة عائلية، لا كأفراد منفصلين. لأن ثقافة الاستشارة المالية في الخليج بطبيعتها عائلية، فلمّا نُخاطب العائلة بدل الفرد، السعر يصبح يستحق عند العميل، والقيمة تتوزّع على أكثر من شخص.</p>
         <div class="dept-leads"><strong>تقوده:</strong> غالية + سارة</div>
       </div>
 
-      <div class="dept-card">
-        <div class="dept-icon">
-          <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18M7 14l4-4 4 4 5-5"/></svg>
-        </div>
+      <div class="dept-card founders reveal reveal-5">
+        <div class="dept-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18M7 14l4-4 4 4 5-5"/></svg></div>
         <h3 class="dept-name">قسم رواد الأعمال</h3>
         <div class="dept-en">FOUNDERS SEGMENT</div>
-        <p class="dept-text">
-          تخصص أساسي في إدارة الكاش لرواد الأعمال – سواء في مرحلة الأزمة أو في مرحلة النمو. سوقنا هنا ليس الكويت فقط، إنما السوق الخليجي بأكمله. التركيز على إدارة الكاش هو ميزتنا التنافسية الفريدة.
-        </p>
+        <p class="dept-text">تخصص أساسي في إدارة الكاش لرواد الأعمال – سواء في مرحلة الأزمة أو في مرحلة النمو. سوقنا هنا ليس الكويت فقط، إنما السوق الخليجي بأكمله. التركيز على إدارة الكاش هو ميزتنا التنافسية الفريدة.</p>
         <div class="dept-leads"><strong>يقوده:</strong> حسن</div>
       </div>
     </div>
@@ -1471,328 +1450,245 @@ body.overview-mode .deck-progress { display: none; }
   <div class="slide-footer"><div>Specialized Segments</div><div class="slide-page">12</div></div>
 </section>
 
-<!-- ========================================================== -->
-<!-- SLIDE 13: TEAM -->
-<!-- ========================================================== -->
+<!-- ===== SLIDE 13: SUB-BRANDS ===== -->
+<section class="slide blue-soft">
+  <div class="slide-header">
+    <div class="slide-brand"><div class="slide-brand-mark"><img src="../assets/img/cashclinic-logo.webp" alt=""></div><div class="slide-brand-text">كاش كلينيك<small>CASH CLINIC</small></div></div>
+    <div class="slide-meta">PRODUCT FAMILY</div>
+  </div>
+  <div class="slide-body">
+    <div class="eyebrow reveal reveal-1">عائلة منتجاتنا</div>
+    <h2 class="title-h2 reveal reveal-2">منظومة واحدة – <span class="h-blue">منتجات متخصصة</span> لكل احتياج.</h2>
+    <p class="lead reveal reveal-3" style="font-size: 16px; margin-bottom: 1vh;">تحت مظلة كاش كلينيك، نُقدّم خطوط منتجات متخصصة، كل خط يخدم شريحة واحتياجًا محددًا.</p>
+
+    <div class="brands-grid">
+      <div class="brand-tile reveal reveal-4">
+        <div class="brand-tile-tag">CORE</div>
+        <div class="brand-tile-img"><img src="../assets/img/cashclinic-logo.webp" alt="Cash Clinic"></div>
+        <div class="brand-tile-name">Cash Clinic</div>
+        <div class="brand-tile-desc">المظلة الرئيسية – الاستشارات المالية الفردية والعائلية</div>
+      </div>
+      <div class="brand-tile reveal reveal-5">
+        <div class="brand-tile-tag" style="background:var(--orange); color:white;">PREMIUM</div>
+        <div class="brand-tile-img"><img src="../assets/img/cashgold-logo.webp" alt="Cash Gold"></div>
+        <div class="brand-tile-name">Cash Gold</div>
+        <div class="brand-tile-desc">منتج النخبة – استشارات وخدمات للعائلات والأفراد ذوي الملاءة العالية</div>
+      </div>
+      <div class="brand-tile reveal reveal-6">
+        <div class="brand-tile-tag" style="background:var(--purple); color:white;">GROWTH</div>
+        <div class="brand-tile-img"><img src="../assets/img/cashnas-logo.webp" alt="Cash Nas"></div>
+        <div class="brand-tile-name">Cash Nas</div>
+        <div class="brand-tile-desc">برنامج النمو والوفرة المالية – بناء عادات مالية تتراكم سنة بعد سنة</div>
+      </div>
+      <div class="brand-tile reveal reveal-7">
+        <div class="brand-tile-tag" style="background:var(--blue); color:white;">FOUNDERS</div>
+        <div class="brand-tile-img"><img src="../assets/img/cashriyada-logo.webp" alt="Cash Riyada"></div>
+        <div class="brand-tile-name">Cash Riyada</div>
+        <div class="brand-tile-desc">خط رواد الأعمال – إدارة الكاش والقرارات المالية في مراحل النمو والأزمة</div>
+      </div>
+    </div>
+  </div>
+  <div class="slide-footer" style="color: rgba(0,0,0,0.5); border-top-color: rgba(0,0,0,0.08);"><div>Product Lines · 2026</div><div class="slide-page">13</div></div>
+</section>
+
+<!-- ===== SLIDE 14: TEAM ===== -->
 <section class="slide">
   <div class="slide-header">
-    <div class="slide-brand"><div class="slide-brand-mark">ك</div><div class="slide-brand-text">كاش كلينيك</div></div>
+    <div class="slide-brand"><div class="slide-brand-mark"><img src="../assets/img/cashclinic-logo.webp" alt=""></div><div class="slide-brand-text">كاش كلينيك<small>CASH CLINIC</small></div></div>
     <div class="slide-meta">OUR TEAM</div>
   </div>
   <div class="slide-body">
-    <div class="eyebrow">فريقنا</div>
-    <h2 class="title-h2">الناس وراء <span class="highlight-yellow">كل جلسة</span>.</h2>
-    <p class="lead" style="margin-top: 12px; font-size: 16px; margin-bottom: 4vh;">فريق متخصص يجمع التخصصات المالية والمنهج العملي – كلّ عضو مسؤول عن جزء واضح من المنظومة.</p>
+    <div class="eyebrow reveal reveal-1">فريقنا</div>
+    <h2 class="title-h2 reveal reveal-2">الناس وراء <span class="h-yellow">كل جلسة</span>.</h2>
+    <p class="lead reveal reveal-3" style="margin-top: 12px; font-size: 16px; margin-bottom: 4vh;">فريق متخصص يجمع التخصصات المالية والمنهج العملي – كلّ عضو مسؤول عن جزء واضح من المنظومة.</p>
 
     <div class="team-grid">
-      <div class="team-card">
+      <div class="team-card reveal reveal-4">
         <div class="team-avatar">غ</div>
         <div class="team-name">غالية</div>
         <div class="team-role">قسم العائلة · المؤسِّسة الرئيسية</div>
         <div class="team-bio">المسؤولة عن قسم العائلة، الوجه الرئيسي لكاش كلينيك، وقائدة المحتوى التخصصي.</div>
       </div>
-      <div class="team-card">
+      <div class="team-card reveal reveal-5">
         <div class="team-avatar">س</div>
         <div class="team-name">سارة</div>
         <div class="team-role">قسم العائلة · مستشارة</div>
         <div class="team-bio">شريكة قسم العائلة – تركّز على الجانب السلوكي والإرشاد العائلي للأزواج.</div>
       </div>
-      <div class="team-card">
+      <div class="team-card reveal reveal-6">
         <div class="team-avatar">ح</div>
         <div class="team-name">حسن</div>
         <div class="team-role">قسم رواد الأعمال · المتخصص</div>
         <div class="team-bio">يقود قسم رواد الأعمال بتخصص في إدارة الكاش – للأزمات والنمو على مستوى الخليج.</div>
       </div>
-      <div class="team-card">
+      <div class="team-card reveal reveal-7">
         <div class="team-avatar">إ</div>
         <div class="team-name">إسراء</div>
         <div class="team-role">العمليات والتنسيق</div>
         <div class="team-bio">تُدير عمليات الجدولة والتنسيق والمتابعة مع العملاء والشركاء.</div>
       </div>
     </div>
-
-    <p style="margin-top: 32px; font-size: 13px; color: var(--gray-500); font-style: italic; text-align: center;">
-      كاش كلينيك = الكيان الموحّد. كل عضو يدعم محتوى الشركة من حسابه الشخصي مع الحفاظ على الهوية المؤسسية.
-    </p>
   </div>
-  <div class="slide-footer"><div>Cash Clinic Team · 2026</div><div class="slide-page">13</div></div>
+  <div class="slide-footer"><div>Cash Clinic Team · 2026</div><div class="slide-page">14</div></div>
 </section>
 
-<!-- ========================================================== -->
-<!-- SLIDE 14: SECTION DIVIDER - CHARITY PARTNERSHIP -->
-<!-- ========================================================== -->
+<!-- ===== SLIDE 15: DIVIDER 03 - CHARITY PARTNERSHIP ===== -->
 <section class="slide dark section-divider">
   <div class="section-divider-num">03</div>
   <div class="section-divider-content slide-body">
-    <div class="eyebrow">القسم الثالث</div>
-    <h2 class="title-h1" style="color: white;">شراكتنا<br>مع <span class="highlight-yellow">الجمعيات الخيرية</span>.</h2>
-    <p class="lead" style="margin-top: 24px;">برنامج مخصّص لكسر دائرة الاعتمادية لدى المستفيدين – بمنهج علمي وتقارير شفافة.</p>
+    <div class="eyebrow reveal reveal-1">القسم الثالث</div>
+    <h2 class="title-h1 reveal reveal-2" style="color: white;">شراكتنا<br>مع <span class="h-yellow">الجمعيات الخيرية</span>.</h2>
+    <p class="lead reveal reveal-3" style="margin-top: 24px;">برنامج مخصّص لكسر دائرة الاعتمادية لدى المستفيدين – بمنهج علمي وتقارير شفافة.</p>
   </div>
-  <div class="slide-footer"><div>Charity Partnership Program</div><div class="slide-page">14</div></div>
+  <div class="slide-footer"><div>Charity Partnership Program</div><div class="slide-page">15</div></div>
 </section>
 
-<!-- ========================================================== -->
-<!-- SLIDE 15: WHY CHARITIES CHOOSE US -->
-<!-- ========================================================== -->
-<section class="slide gradient">
+<!-- ===== SLIDE 16: WHY CHARITIES CHOOSE US ===== -->
+<section class="slide purple-deep">
   <div class="slide-header">
-    <div class="slide-brand"><div class="slide-brand-mark">ك</div><div class="slide-brand-text" style="color: white;">كاش كلينيك</div></div>
+    <div class="slide-brand"><div class="slide-brand-mark"><img src="../assets/img/cashclinic-logo.webp" alt=""></div><div class="slide-brand-text">كاش كلينيك<small>CASH CLINIC</small></div></div>
     <div class="slide-meta">WHY CHARITIES CHOOSE US</div>
   </div>
   <div class="slide-body">
-    <div class="eyebrow">لماذا تختارنا الجمعيات؟</div>
-    <h2 class="title-h2" style="color: white;">لأنّنا نُحوّل الإنفاق إلى<br><span class="highlight-yellow">أثر قابل للقياس</span>.</h2>
+    <div class="eyebrow reveal reveal-1">لماذا تختارنا الجمعيات؟</div>
+    <h2 class="title-h2 reveal reveal-2" style="color: white;">لأنّنا نُحوّل الإنفاق إلى<br><span class="h-yellow">أثر قابل للقياس</span>.</h2>
 
     <div class="value-list">
-      <div class="value-item">
-        <div class="value-check">✓</div>
-        <div class="value-text"><strong>منهجية مهنية موثّقة</strong> – ٤ جلسات مدروسة بمحتوى محدّد لكل جلسة، لا ارتجال.</div>
-      </div>
-      <div class="value-item">
-        <div class="value-check">✓</div>
-        <div class="value-text"><strong>تقارير شفافة لكل جلسة</strong> – الجمعية تستلم تقريرًا تفصيليًا بعد كل جلسة، لا عند الختام فقط.</div>
-      </div>
-      <div class="value-item">
-        <div class="value-check">✓</div>
-        <div class="value-text"><strong>قياس «قبل/بعد» إلزامي</strong> – بثلاثة أبعاد: مالي، سلوكي، نفسي. الأثر مرئي بالأرقام.</div>
-      </div>
-      <div class="value-item">
-        <div class="value-check">✓</div>
-        <div class="value-text"><strong>التقرير الشامل النهائي</strong> – منصوص عليه في العقد، يضمّ السجل الكامل والتسوية والتوصية.</div>
-      </div>
-      <div class="value-item">
-        <div class="value-check">✓</div>
-        <div class="value-text"><strong>الاستدامة بعد البرنامج</strong> – المستفيد يخرج بكرّاس شخصي وأدوات تُستخدم لسنوات.</div>
-      </div>
-      <div class="value-item">
-        <div class="value-check">✓</div>
-        <div class="value-text"><strong>تسعير مدعوم ٣٠٪</strong> – خصم خاص للجمعيات الخيرية، شفافية مالية في كل فاتورة تسوية.</div>
-      </div>
+      <div class="value-item reveal reveal-3"><div class="value-check">✓</div><div class="value-text"><strong>منهجية مهنية موثّقة</strong> – ٤ جلسات مدروسة بمحتوى محدّد لكل جلسة، لا ارتجال.</div></div>
+      <div class="value-item reveal reveal-4"><div class="value-check" style="background:var(--orange); color:white;">✓</div><div class="value-text"><strong>تقارير شفافة لكل جلسة</strong> – الجمعية تستلم تقريرًا تفصيليًا بعد كل جلسة، لا عند الختام فقط.</div></div>
+      <div class="value-item reveal reveal-5"><div class="value-check" style="background:var(--blue); color:white;">✓</div><div class="value-text"><strong>قياس «قبل/بعد» إلزامي</strong> – بثلاثة أبعاد: مالي، سلوكي، نفسي. الأثر مرئي بالأرقام.</div></div>
+      <div class="value-item reveal reveal-6"><div class="value-check">✓</div><div class="value-text"><strong>التقرير الشامل النهائي</strong> – منصوص عليه في العقد، يضمّ السجل الكامل والتسوية والتوصية.</div></div>
+      <div class="value-item reveal reveal-7"><div class="value-check" style="background:var(--orange); color:white;">✓</div><div class="value-text"><strong>الاستدامة بعد البرنامج</strong> – المستفيد يخرج بكرّاس شخصي وأدوات تُستخدم لسنوات.</div></div>
+      <div class="value-item reveal reveal-8"><div class="value-check" style="background:var(--blue); color:white;">✓</div><div class="value-text"><strong>تسعير مدعوم ٣٠٪</strong> – خصم خاص للجمعيات الخيرية، شفافية مالية في كل فاتورة تسوية.</div></div>
     </div>
   </div>
-  <div class="slide-footer"><div>Charity Value Proposition</div><div class="slide-page">15</div></div>
+  <div class="slide-footer"><div>Charity Value Proposition</div><div class="slide-page">16</div></div>
 </section>
 
-<!-- ========================================================== -->
-<!-- SLIDE 16: 4-SESSION PROGRAM -->
-<!-- ========================================================== -->
+<!-- ===== SLIDE 17: 4-SESSION PROGRAM ===== -->
 <section class="slide">
   <div class="slide-header">
-    <div class="slide-brand"><div class="slide-brand-mark">ك</div><div class="slide-brand-text">كاش كلينيك</div></div>
+    <div class="slide-brand"><div class="slide-brand-mark"><img src="../assets/img/cashclinic-logo.webp" alt=""></div><div class="slide-brand-text">كاش كلينيك<small>CASH CLINIC</small></div></div>
     <div class="slide-meta">CHARITY PROGRAM · 4 SESSIONS</div>
   </div>
   <div class="slide-body">
-    <div class="eyebrow">برنامج الجمعيات</div>
-    <h2 class="title-h2">رحلة المستفيد في <span class="highlight-yellow">٤ جلسات</span> مدروسة.</h2>
-    <p class="lead" style="margin-top: 12px; font-size: 15px; margin-bottom: 5vh;">منهج متدرّج: من التشخيص للأنماط، إلى المتابعة وتثبيت العادات، إلى الجلسة الختامية بالمقارنة الإلزامية «قبل/بعد».</p>
+    <div class="eyebrow reveal reveal-1">برنامج الجمعيات</div>
+    <h2 class="title-h2 reveal reveal-2">رحلة المستفيد في <span class="h-yellow">٤ جلسات</span> مدروسة.</h2>
+    <p class="lead reveal reveal-3" style="margin-top: 12px; font-size: 15px; margin-bottom: 5vh;">منهج متدرّج: من التشخيص للأنماط، إلى المتابعة وتثبيت العادات، إلى الجلسة الختامية بالمقارنة الإلزامية «قبل/بعد».</p>
 
-    <div class="timeline-4">
-      <div class="tl-step">
-        <div class="tl-step-num">١</div>
-        <div class="tl-step-week">الأسبوع الأول</div>
-        <div class="tl-step-name">الجلسة التشخيصية</div>
-        <div class="tl-step-text">تقييم الوضع المالي بالأرقام، فهم الأنماط السلوكية، تحديد الأهداف، رسم خطّة العلاج، وواجبات الأسبوع.</div>
-      </div>
-      <div class="tl-step">
-        <div class="tl-step-num">٢</div>
-        <div class="tl-step-week">الأسبوع الثاني</div>
-        <div class="tl-step-name">المتابعة الأولى</div>
-        <div class="tl-step-text">مراجعة الواجبات، تحليل سجل المصاريف الأسبوعي، التمييز بين الحاجة والرغبة، بناء الميزانية الفعلية.</div>
-      </div>
-      <div class="tl-step">
-        <div class="tl-step-num">٣</div>
-        <div class="tl-step-week">الأسبوع الثالث</div>
-        <div class="tl-step-name">المتابعة الثانية</div>
-        <div class="tl-step-text">تثبيت العادات الجديدة، التعامل مع التحديات الباقية، التحضير للاستقلالية، خطّة الطوارئ النفسية والمالية.</div>
-      </div>
-      <div class="tl-step">
-        <div class="tl-step-num">٤</div>
-        <div class="tl-step-week">الأسبوع الرابع</div>
-        <div class="tl-step-name">الجلسة الختامية</div>
-        <div class="tl-step-text">المقارنة الإلزامية «قبل/بعد» بأبعادها الثلاثة. تخريج المستفيد بأدواته، خطّة ٦ أشهر، عهد الاستقلالية.</div>
-      </div>
+    <div class="timeline-4 reveal-fade">
+      <div class="tl-step"><div class="tl-step-num">١</div><div class="tl-step-week">الأسبوع الأول</div><div class="tl-step-name">الجلسة التشخيصية</div><div class="tl-step-text">تقييم الوضع المالي بالأرقام، فهم الأنماط السلوكية، تحديد الأهداف، رسم خطّة العلاج، وواجبات الأسبوع.</div></div>
+      <div class="tl-step"><div class="tl-step-num">٢</div><div class="tl-step-week">الأسبوع الثاني</div><div class="tl-step-name">المتابعة الأولى</div><div class="tl-step-text">مراجعة الواجبات، تحليل سجل المصاريف الأسبوعي، التمييز بين الحاجة والرغبة، بناء الميزانية الفعلية.</div></div>
+      <div class="tl-step"><div class="tl-step-num">٣</div><div class="tl-step-week">الأسبوع الثالث</div><div class="tl-step-name">المتابعة الثانية</div><div class="tl-step-text">تثبيت العادات الجديدة، التعامل مع التحديات الباقية، التحضير للاستقلالية، خطّة الطوارئ النفسية والمالية.</div></div>
+      <div class="tl-step"><div class="tl-step-num">٤</div><div class="tl-step-week">الأسبوع الرابع</div><div class="tl-step-name">الجلسة الختامية</div><div class="tl-step-text">المقارنة الإلزامية «قبل/بعد» بأبعادها الثلاثة. تخريج المستفيد بأدواته، خطّة ٦ أشهر، عهد الاستقلالية.</div></div>
     </div>
   </div>
-  <div class="slide-footer"><div>4-Session Charity Program · Per Contract</div><div class="slide-page">16</div></div>
+  <div class="slide-footer"><div>4-Session Charity Program · Per Contract</div><div class="slide-page">17</div></div>
 </section>
 
-<!-- ========================================================== -->
-<!-- SLIDE 17: FULL PROCESS WITH CHARITY -->
-<!-- ========================================================== -->
-<section class="slide dark-2">
+<!-- ===== SLIDE 18: FULL PROCESS WITH CHARITY ===== -->
+<section class="slide dark">
   <div class="slide-header">
-    <div class="slide-brand"><div class="slide-brand-mark">ك</div><div class="slide-brand-text" style="color: white;">كاش كلينيك</div></div>
+    <div class="slide-brand"><div class="slide-brand-mark"><img src="../assets/img/cashclinic-logo.webp" alt=""></div><div class="slide-brand-text">كاش كلينيك<small>CASH CLINIC</small></div></div>
     <div class="slide-meta">PARTNERSHIP WORKFLOW</div>
   </div>
   <div class="slide-body">
-    <div class="eyebrow">آلية الشراكة الكاملة</div>
-    <h2 class="title-h2" style="color: white;">من <span class="highlight-yellow">استلام الحالة</span> إلى <span class="highlight-yellow">التخريج والاستدامة</span>.</h2>
+    <div class="eyebrow reveal reveal-1">آلية الشراكة الكاملة</div>
+    <h2 class="title-h2 reveal reveal-2" style="color: white;">من <span class="h-yellow">استلام الحالة</span> إلى <span class="h-yellow">التخريج والاستدامة</span>.</h2>
 
     <div class="process-list">
-      <div class="proc-row">
-        <div class="proc-num">1</div>
-        <div>
-          <div class="proc-title">استلام الحالة من الجمعية</div>
-          <div class="proc-text">المنسّق يُعبّئ نموذج استلام الحالة + ملف المستفيد الكامل (مدني، راتب، بنكي، قروض، تاريخ المساعدات).</div>
-        </div>
-      </div>
-      <div class="proc-row">
-        <div class="proc-num">2</div>
-        <div>
-          <div class="proc-title">تقييم الأهلية وقرار القبول</div>
-          <div class="proc-text">فريق كاش كلينيك يُراجع، يتحقّق من الاستثناءات (إدمان قمار/مخدرات)، ويُصدر القرار: قبول / مراجعة / رفض مع بديل.</div>
-        </div>
-      </div>
-      <div class="proc-row">
-        <div class="proc-num">3</div>
-        <div>
-          <div class="proc-title">إقرار المستفيد بالشروط</div>
-          <div class="proc-text">المستفيد يوقّع على سياسات الحضور والتأخر والتأجيل والسرّية قبل الجلسة الأولى.</div>
-        </div>
-      </div>
-      <div class="proc-row">
-        <div class="proc-num">4</div>
-        <div>
-          <div class="proc-title">٤ جلسات أسبوعية + تقرير وفاتورة بعد كل جلسة</div>
-          <div class="proc-text">يوم السبت أسبوعيًا، ٤٥–٦٠ دقيقة. تقرير تفصيلي + فاتورة تسوية للجمعية بعد كل جلسة.</div>
-        </div>
-      </div>
-      <div class="proc-row">
-        <div class="proc-num">5</div>
-        <div>
-          <div class="proc-title">المقارنة الإلزامية «قبل/بعد» في الجلسة الختامية</div>
-          <div class="proc-text">٣ أبعاد للقياس: مالي (دخل/مصاريف/ديون)، سلوكي (١٠ عادات)، نفسي (٦ مؤشرات بمقياس ١-٥).</div>
-        </div>
-      </div>
-      <div class="proc-row">
-        <div class="proc-num">6</div>
-        <div>
-          <div class="proc-title">التقرير اليومي الشامل النهائي + التوصية</div>
-          <div class="proc-text">منصوص عليه في العقد. التوصية النهائية: إغلاق ملف، متابعة دورية، أو إحالة لجهة متخصصة.</div>
-        </div>
-      </div>
+      <div class="proc-row reveal reveal-3"><div class="proc-num">1</div><div><div class="proc-title">استلام الحالة من الجمعية</div><div class="proc-text">المنسّق يُعبّئ نموذج استلام الحالة + ملف المستفيد الكامل (مدني، راتب، بنكي، قروض، تاريخ المساعدات).</div></div></div>
+      <div class="proc-row reveal reveal-4"><div class="proc-num">2</div><div><div class="proc-title">تقييم الأهلية وقرار القبول</div><div class="proc-text">فريق كاش كلينيك يُراجع، يتحقّق من الاستثناءات (إدمان قمار/مخدرات)، ويُصدر القرار: قبول / مراجعة / رفض مع بديل.</div></div></div>
+      <div class="proc-row reveal reveal-5"><div class="proc-num">3</div><div><div class="proc-title">إقرار المستفيد بالشروط</div><div class="proc-text">المستفيد يوقّع على سياسات الحضور والتأخر والتأجيل والسرّية قبل الجلسة الأولى.</div></div></div>
+      <div class="proc-row reveal reveal-6"><div class="proc-num">4</div><div><div class="proc-title">٤ جلسات أسبوعية + تقرير وفاتورة بعد كل جلسة</div><div class="proc-text">يوم السبت أسبوعيًا، ٤٥–٦٠ دقيقة. تقرير تفصيلي + فاتورة تسوية للجمعية بعد كل جلسة.</div></div></div>
+      <div class="proc-row reveal reveal-7"><div class="proc-num">5</div><div><div class="proc-title">المقارنة الإلزامية «قبل/بعد» في الجلسة الختامية</div><div class="proc-text">٣ أبعاد للقياس: مالي (دخل/مصاريف/ديون)، سلوكي (١٠ عادات)، نفسي (٦ مؤشرات بمقياس ١-٥).</div></div></div>
+      <div class="proc-row reveal reveal-8"><div class="proc-num">6</div><div><div class="proc-title">التقرير اليومي الشامل النهائي + التوصية</div><div class="proc-text">منصوص عليه في العقد. التوصية النهائية: إغلاق ملف، متابعة دورية، أو إحالة لجهة متخصصة.</div></div></div>
     </div>
   </div>
-  <div class="slide-footer"><div>Per Contract Workflow</div><div class="slide-page">17</div></div>
+  <div class="slide-footer"><div>Per Contract Workflow</div><div class="slide-page">18</div></div>
 </section>
 
-<!-- ========================================================== -->
-<!-- SLIDE 18: REPORTING SYSTEM -->
-<!-- ========================================================== -->
+<!-- ===== SLIDE 19: REPORTING SYSTEM ===== -->
 <section class="slide">
   <div class="slide-header">
-    <div class="slide-brand"><div class="slide-brand-mark">ك</div><div class="slide-brand-text">كاش كلينيك</div></div>
+    <div class="slide-brand"><div class="slide-brand-mark"><img src="../assets/img/cashclinic-logo.webp" alt=""></div><div class="slide-brand-text">كاش كلينيك<small>CASH CLINIC</small></div></div>
     <div class="slide-meta">REPORTING SYSTEM</div>
   </div>
   <div class="slide-body">
-    <div class="eyebrow">نظام التقارير</div>
-    <h2 class="title-h2"><span class="highlight-yellow">١٣ تقرير ونموذج</span> – نظام رقمي تفاعلي كامل.</h2>
-    <p class="lead" style="margin-top: 12px; font-size: 15px;">منظومة موثّقة للجمعية والمستفيد على حدّ سواء. كل وثيقة مصمّمة بمنهج علمي ومراجعة قانونية وفق العقد. متوفّرة كنظام رقمي تفاعلي يحفظ تلقائيًا ويُصدر PDF احترافي.</p>
+    <div class="eyebrow reveal reveal-1">نظام التقارير</div>
+    <h2 class="title-h2 reveal reveal-2"><span class="h-purple">١٣ تقرير ونموذج</span> – نظام رقمي تفاعلي كامل.</h2>
+    <p class="lead reveal reveal-3" style="margin-top: 12px; font-size: 15px;">منظومة موثّقة للجمعية والمستفيد على حدّ سواء. كل وثيقة مصمّمة بمنهج علمي ومراجعة قانونية وفق العقد. متوفّرة كنظام رقمي تفاعلي يحفظ تلقائيًا ويُصدر PDF احترافي.</p>
 
-    <h3 style="font-size: 14px; font-weight: 700; color: var(--gray-500); letter-spacing: 1px; margin-top: 24px; margin-bottom: 10px;">للجمعية</h3>
+    <h3 class="reveal reveal-4" style="font-size: 14px; font-weight: 700; color: var(--blue); letter-spacing: 1px; margin-top: 24px; margin-bottom: 10px;">للجمعية</h3>
     <div class="reports-grid">
-      <div class="rep-tile"><div class="rep-num">٦</div><div class="rep-text">نموذج استلام الحالة</div></div>
-      <div class="rep-tile"><div class="rep-num">٧</div><div class="rep-text">تقييم وقرار القبول</div></div>
-      <div class="rep-tile"><div class="rep-num">١</div><div class="rep-text">تقرير الجلسة التشخيصية</div></div>
-      <div class="rep-tile"><div class="rep-num">٢</div><div class="rep-text">تقرير المتابعة ١</div></div>
-      <div class="rep-tile"><div class="rep-num">٣</div><div class="rep-text">تقرير المتابعة ٢</div></div>
-      <div class="rep-tile featured"><div class="rep-num">٤</div><div class="rep-text">الختامية + قبل/بعد</div></div>
-      <div class="rep-tile featured"><div class="rep-num">٥</div><div class="rep-text">التقرير الشامل النهائي</div></div>
-      <div class="rep-tile"><div class="rep-num">$</div><div class="rep-text">فاتورة تسوية × ٤</div></div>
+      <div class="rep-tile reveal reveal-4"><div class="rep-num">٦</div><div class="rep-text">نموذج استلام الحالة</div></div>
+      <div class="rep-tile reveal reveal-4"><div class="rep-num">٧</div><div class="rep-text">تقييم وقرار القبول</div></div>
+      <div class="rep-tile reveal reveal-4"><div class="rep-num">١</div><div class="rep-text">تقرير الجلسة التشخيصية</div></div>
+      <div class="rep-tile reveal reveal-4"><div class="rep-num">٢</div><div class="rep-text">تقرير المتابعة ١</div></div>
+      <div class="rep-tile reveal reveal-5"><div class="rep-num">٣</div><div class="rep-text">تقرير المتابعة ٢</div></div>
+      <div class="rep-tile featured reveal reveal-5"><div class="rep-num">٤</div><div class="rep-text">الختامية + قبل/بعد</div></div>
+      <div class="rep-tile featured reveal reveal-5"><div class="rep-num">٥</div><div class="rep-text">التقرير الشامل النهائي</div></div>
+      <div class="rep-tile reveal reveal-5"><div class="rep-num">$</div><div class="rep-text">فاتورة تسوية × ٤</div></div>
     </div>
 
-    <h3 style="font-size: 14px; font-weight: 700; color: var(--gray-500); letter-spacing: 1px; margin-top: 20px; margin-bottom: 10px;">للمستفيد (كرّاسات شخصية)</h3>
+    <h3 class="reveal reveal-6" style="font-size: 14px; font-weight: 700; color: var(--orange-deep); letter-spacing: 1px; margin-top: 20px; margin-bottom: 10px;">للمستفيد (كرّاسات شخصية)</h3>
     <div class="reports-grid">
-      <div class="rep-tile"><div class="rep-num">٠</div><div class="rep-text">إقرار العميل بالشروط</div></div>
-      <div class="rep-tile"><div class="rep-num">١</div><div class="rep-text">جلستي الأولى – أين أنا الآن؟</div></div>
-      <div class="rep-tile"><div class="rep-num">٢</div><div class="rep-text">جلستي الثانية – أسبوعي الأول</div></div>
-      <div class="rep-tile"><div class="rep-num">٣</div><div class="rep-text">جلستي الثالثة – كم تقدّمت؟</div></div>
-      <div class="rep-tile featured"><div class="rep-num">٤</div><div class="rep-text">رحلتي قبل وبعد ⭐</div></div>
+      <div class="rep-tile reveal reveal-6"><div class="rep-num">٠</div><div class="rep-text">إقرار العميل بالشروط</div></div>
+      <div class="rep-tile reveal reveal-6"><div class="rep-num">١</div><div class="rep-text">جلستي الأولى – أين أنا الآن؟</div></div>
+      <div class="rep-tile reveal reveal-7"><div class="rep-num">٢</div><div class="rep-text">جلستي الثانية – أسبوعي الأول</div></div>
+      <div class="rep-tile reveal reveal-7"><div class="rep-num">٣</div><div class="rep-text">جلستي الثالثة – كم تقدّمت؟</div></div>
+      <div class="rep-tile featured reveal reveal-7"><div class="rep-num">٤</div><div class="rep-text">رحلتي قبل وبعد ⭐</div></div>
     </div>
   </div>
-  <div class="slide-footer"><div>13 Documents · Digital + Print Ready</div><div class="slide-page">18</div></div>
+  <div class="slide-footer"><div>13 Documents · Digital + Print Ready</div><div class="slide-page">19</div></div>
 </section>
 
-<!-- ========================================================== -->
-<!-- SLIDE 19: PRICING -->
-<!-- ========================================================== -->
+<!-- ===== SLIDE 20: PRICING ===== -->
 <section class="slide yellow-soft">
   <div class="slide-header">
-    <div class="slide-brand"><div class="slide-brand-mark">ك</div><div class="slide-brand-text">كاش كلينيك</div></div>
+    <div class="slide-brand"><div class="slide-brand-mark"><img src="../assets/img/cashclinic-logo.webp" alt=""></div><div class="slide-brand-text">كاش كلينيك<small>CASH CLINIC</small></div></div>
     <div class="slide-meta">CHARITY PRICING</div>
   </div>
   <div class="slide-body">
-    <div class="eyebrow">التسعير المدعوم للجمعيات</div>
-    <h2 class="title-h2">شفافية كاملة – <span class="highlight-yellow">١٤٠ د.ك للمستفيد</span> الواحد.</h2>
-    <p class="lead" style="margin-top: 12px; font-size: 16px; margin-bottom: 4vh;">سعر مدعوم بخصم ٣٠٪ على السعر الأصلي – مع ضمان جودة كاش كلينيك الكاملة وتقاريرها العلمية لكل جلسة.</p>
+    <div class="eyebrow reveal reveal-1">التسعير المدعوم للجمعيات</div>
+    <h2 class="title-h2 reveal reveal-2">شفافية كاملة – <span class="h-purple">١٤٠ د.ك للمستفيد</span> الواحد.</h2>
+    <p class="lead reveal reveal-3" style="margin-top: 12px; font-size: 16px; margin-bottom: 4vh;">سعر مدعوم بخصم ٣٠٪ على السعر الأصلي – مع ضمان جودة كاش كلينيك الكاملة وتقاريرها العلمية لكل جلسة.</p>
 
-    <div class="pricing-card">
-      <div class="pricing-row">
-        <span>سعر الجلسة الأصلي</span>
-        <span class="pricing-num"><span class="pricing-strike">٥٠٫٠٠٠</span> د.ك</span>
-      </div>
-      <div class="pricing-row">
-        <span>نسبة الخصم للجمعيات الخيرية</span>
-        <span class="pricing-num" style="color: var(--success);">– ٣٠٪</span>
-      </div>
-      <div class="pricing-row">
-        <span>سعر الجلسة بعد الخصم</span>
-        <span class="pricing-num">٣٥٫٠٠٠ د.ك</span>
-      </div>
-      <div class="pricing-row">
-        <span>عدد جلسات الباقة</span>
-        <span class="pricing-num">٤ جلسات</span>
-      </div>
-      <div class="pricing-row">
-        <span>الدفعة المقدّمة</span>
-        <span class="pricing-num">١٠٠٪ من الباقة</span>
-      </div>
-      <div class="pricing-row">
-        <span>الفواتير</span>
-        <span style="font-size: 14px; color: var(--gray-700);">فاتورة تسوية بعد كل جلسة + تقرير شامل ختامي</span>
-      </div>
-      <div class="pricing-row total">
-        <span>إجمالي قيمة الباقة للمستفيد الواحد</span>
-        <span class="pricing-num">١٤٠٫٠٠٠ د.ك</span>
-      </div>
+    <div class="pricing-card reveal-scale">
+      <div class="pricing-row"><span>سعر الجلسة الأصلي</span><span class="pricing-num"><span class="pricing-strike">٥٠٫٠٠٠</span> د.ك</span></div>
+      <div class="pricing-row"><span>نسبة الخصم للجمعيات الخيرية</span><span class="pricing-num" style="color: var(--blue);">– ٣٠٪</span></div>
+      <div class="pricing-row"><span>سعر الجلسة بعد الخصم</span><span class="pricing-num">٣٥٫٠٠٠ د.ك</span></div>
+      <div class="pricing-row"><span>عدد جلسات الباقة</span><span class="pricing-num">٤ جلسات</span></div>
+      <div class="pricing-row"><span>الدفعة المقدّمة</span><span class="pricing-num">١٠٠٪ من الباقة</span></div>
+      <div class="pricing-row"><span>الفواتير</span><span style="font-size: 14px; color: var(--ink-soft);">فاتورة تسوية بعد كل جلسة + تقرير شامل ختامي</span></div>
+      <div class="pricing-row total"><span>إجمالي قيمة الباقة للمستفيد الواحد</span><span class="pricing-num">١٤٠٫٠٠٠ د.ك</span></div>
     </div>
   </div>
-  <div class="slide-footer" style="color: rgba(0,0,0,0.5); border-top-color: rgba(0,0,0,0.08);"><div>Per Beneficiary · 4-Session Package</div><div class="slide-page">19</div></div>
+  <div class="slide-footer" style="color: rgba(0,0,0,0.5); border-top-color: rgba(0,0,0,0.08);"><div>Per Beneficiary · 4-Session Package</div><div class="slide-page">20</div></div>
 </section>
 
-<!-- ========================================================== -->
-<!-- SLIDE 20: CLOSING / CONTACT -->
-<!-- ========================================================== -->
-<section class="slide gradient">
+<!-- ===== SLIDE 21: CLOSING / CONTACT ===== -->
+<section class="slide purple-deep">
   <div class="slide-header">
-    <div class="slide-brand"><div class="slide-brand-mark">ك</div><div class="slide-brand-text" style="color:white;">كاش كلينيك</div></div>
+    <div class="slide-brand"><div class="slide-brand-mark"><img src="../assets/img/cashclinic-logo.webp" alt=""></div><div class="slide-brand-text">كاش كلينيك<small>CASH CLINIC</small></div></div>
     <div class="slide-meta">LET'S PARTNER</div>
   </div>
   <div class="closing-cta">
     <div>
-      <div class="eyebrow">الخطوة التالية</div>
-      <h2 class="closing-h">جمعيتكم تستحق شريكًا<br><span>يقيس الأثر</span> لا الإنفاق.</h2>
-      <p class="lead" style="margin-top: 24px; max-width: 900px;">
+      <div class="eyebrow reveal reveal-1">الخطوة التالية</div>
+      <h2 class="closing-h reveal reveal-2">جمعيتكم تستحق شريكًا<br><span>يقيس الأثر</span> لا الإنفاق.</h2>
+      <p class="lead reveal reveal-3" style="margin-top: 24px; max-width: 900px;">
         نحن مستعدّون لاتفاقية شراكة مخصّصة لجمعيتكم – بأسعار مدعومة، تقارير شفافة، ومنهجية موثّقة. لنبدأ بحالة تجريبية واحدة، ثم نتوسّع بناءً على النتائج.
       </p>
     </div>
 
     <div class="contact-grid">
-      <div class="contact-item">
-        <div class="contact-label">EMAIL</div>
-        <div class="contact-value font-en">info@cashclinic.com</div>
-      </div>
-      <div class="contact-item">
-        <div class="contact-label">PHONE</div>
-        <div class="contact-value font-en" style="direction:ltr; text-align:right;">+965 XXXX XXXX</div>
-      </div>
-      <div class="contact-item">
-        <div class="contact-label">WEBSITE</div>
-        <div class="contact-value font-en">cashclinic.com</div>
-      </div>
+      <div class="contact-item reveal reveal-4"><div class="contact-label">EMAIL</div><div class="contact-value font-en">info@cashclinic.com</div></div>
+      <div class="contact-item reveal reveal-5"><div class="contact-label">PHONE</div><div class="contact-value font-en" style="direction:ltr; text-align:right;">+965 XXXX XXXX</div></div>
+      <div class="contact-item reveal reveal-6"><div class="contact-label">WEBSITE</div><div class="contact-value font-en">cashclinic.com</div></div>
     </div>
   </div>
-  <div class="slide-footer"><div>© 2026 Cash Clinic · Kuwait</div><div class="slide-page">20 / 20</div></div>
+  <div class="slide-footer"><div>© 2026 Cash Clinic · Kuwait</div><div class="slide-page">21 / 21</div></div>
 </section>
 
 </div>
@@ -1800,12 +1696,12 @@ body.overview-mode .deck-progress { display: none; }
 <!-- Navigation Controls -->
 <div class="deck-nav no-print">
   <div class="nav-tools">
-    <button class="nav-overview" id="overview-btn" title="نظرة شاملة (O)">⊞</button>
-    <button class="nav-fullscreen" id="fullscreen-btn" title="ملء الشاشة (F)">⛶</button>
-    <button class="nav-print" id="print-btn" title="طباعة / PDF (P)">🖨</button>
+    <button id="overview-btn" title="نظرة شاملة (O)">⊞</button>
+    <button id="fullscreen-btn" title="ملء الشاشة (F)">⛶</button>
+    <button id="print-btn" title="طباعة / PDF (P)">🖨</button>
   </div>
   <button class="nav-btn" id="prev-btn" title="السابق (→)">←</button>
-  <div class="nav-counter"><span id="cur-slide">1</span> / <span id="total-slides">20</span></div>
+  <div class="nav-counter"><span id="cur-slide">1</span> / <span id="total-slides">21</span></div>
   <button class="nav-btn" id="next-btn" title="التالي (←)">→</button>
 </div>
 
@@ -1826,16 +1722,48 @@ body.overview-mode .deck-progress { display: none; }
 
   totEl.textContent = total;
 
+  // Count-up animation for big numbers
+  function countUp(el) {
+    const target = parseInt(el.dataset.count);
+    const suffix = el.dataset.suffix || '';
+    if (isNaN(target)) return;
+    const duration = 1400;
+    const start = performance.now();
+    const startVal = 0;
+    function frame(now) {
+      const elapsed = now - start;
+      const progress = Math.min(elapsed / duration, 1);
+      // ease-out cubic
+      const eased = 1 - Math.pow(1 - progress, 3);
+      const val = Math.floor(startVal + (target - startVal) * eased);
+      el.textContent = val.toLocaleString('en-US') + suffix;
+      if (progress < 1) requestAnimationFrame(frame);
+      else el.textContent = target.toLocaleString('en-US') + suffix;
+    }
+    requestAnimationFrame(frame);
+  }
+
   function show(idx) {
     if (idx < 0 || idx >= total) return;
-    slides[current].classList.remove('active');
+    slides[current].classList.remove('active', 'animate-charts');
     current = idx;
-    slides[current].classList.add('active');
+    const slide = slides[current];
+    slide.classList.add('active');
+
+    // Trigger chart animations slightly after slide enters
+    setTimeout(() => {
+      slide.classList.add('animate-charts');
+      // Trigger count-up on big numbers in this slide
+      slide.querySelectorAll('[data-count]').forEach(el => {
+        el.textContent = '0';
+        setTimeout(() => countUp(el), 200);
+      });
+    }, 100);
+
     curEl.textContent = current + 1;
     progressFill.style.width = ((current + 1) / total * 100) + '%';
     prevBtn.disabled = current === 0;
     nextBtn.disabled = current === total - 1;
-    // sync hash
     if (window.location.hash !== '#' + (current + 1)) {
       history.replaceState(null, '', '#' + (current + 1));
     }
@@ -1884,13 +1812,13 @@ body.overview-mode .deck-progress { display: none; }
   }
   ovBtn.addEventListener('click', toggleOverview);
 
-  // Touch swipe support for mobile
+  // Touch swipe (RTL)
   let touchStartX = 0;
   document.addEventListener('touchstart', e => { touchStartX = e.touches[0].clientX; }, {passive: true});
   document.addEventListener('touchend', e => {
     const dx = e.changedTouches[0].clientX - touchStartX;
     if (Math.abs(dx) < 50) return;
-    if (dx > 0) show(current + 1); // swipe right (RTL) = next
+    if (dx > 0) show(current + 1);
     else show(current - 1);
   }, {passive: true});
 
