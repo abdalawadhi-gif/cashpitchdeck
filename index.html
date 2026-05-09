@@ -8,7 +8,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700;800;900&family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
-<link rel="icon" href="../assets/img/cashclinic-logo.webp">
+<link rel="icon" href="../assets/img/cashclinic-logo.png">
 
 <style>
 :root {
@@ -698,17 +698,24 @@ body {
   box-shadow: 0 12px 32px rgba(0,0,0,0.10);
 }
 .team-avatar {
-  width: 88px; height: 88px;
+  width: 110px; height: 110px;
   border-radius: 50%;
-  display: flex; align-items: center; justify-content: center;
-  font-weight: 900; font-size: 32px; color: white;
   margin: 0 auto 16px;
-  font-family: var(--font-ar);
+  overflow: hidden;
+  border: 4px solid white;
+  position: relative;
+  background: var(--cream);
 }
-.team-card:nth-child(1) .team-avatar { background: linear-gradient(135deg, var(--yellow) 0%, var(--orange) 100%); color: var(--ink); box-shadow: 0 8px 20px rgba(242,196,2,0.30); }
-.team-card:nth-child(2) .team-avatar { background: linear-gradient(135deg, var(--purple) 0%, var(--purple-deep) 100%); box-shadow: 0 8px 20px rgba(112,32,132,0.30); }
-.team-card:nth-child(3) .team-avatar { background: linear-gradient(135deg, var(--blue) 0%, var(--blue-deep) 100%); box-shadow: 0 8px 20px rgba(37,120,196,0.30); }
-.team-card:nth-child(4) .team-avatar { background: linear-gradient(135deg, var(--orange) 0%, var(--orange-deep) 100%); box-shadow: 0 8px 20px rgba(243,175,47,0.30); }
+.team-avatar img {
+  width: 100%; height: 100%;
+  object-fit: cover;
+  object-position: center 18%;
+  display: block;
+}
+.team-card:nth-child(1) .team-avatar { box-shadow: 0 8px 24px rgba(242,196,2,0.35), 0 0 0 4px var(--yellow); }
+.team-card:nth-child(2) .team-avatar { box-shadow: 0 8px 24px rgba(112,32,132,0.35), 0 0 0 4px var(--purple); }
+.team-card:nth-child(3) .team-avatar { box-shadow: 0 8px 24px rgba(37,120,196,0.35), 0 0 0 4px var(--blue); }
+.team-card:nth-child(4) .team-avatar { box-shadow: 0 8px 24px rgba(243,175,47,0.35), 0 0 0 4px var(--orange); }
 .team-name { font-size: clamp(16px, 1.4vw, 20px); font-weight: 700; color: var(--ink); margin-bottom: 4px; }
 .team-role { font-size: 13px; font-weight: 600; margin-bottom: 12px; }
 .team-card:nth-child(1) .team-role { color: var(--orange-deep); }
@@ -1100,7 +1107,7 @@ body.overview-mode .deck-progress { display: none; }
 
   <div class="cover-content">
     <div class="cover-mark reveal reveal-1">
-      <div class="cover-mark-img"><img src="../assets/img/cashclinic-logo.webp" alt="Cash Clinic"></div>
+      <div class="cover-mark-img"><img src="../assets/img/cashclinic-logo.png" alt="Cash Clinic"></div>
       <div>
         <div class="cover-brand-name">كاش كلينيك</div>
         <div class="cover-brand-en">CASH CLINIC</div>
@@ -1121,7 +1128,7 @@ body.overview-mode .deck-progress { display: none; }
 <!-- ===== SLIDE 2: ABOUT US ===== -->
 <section class="slide">
   <div class="slide-header">
-    <div class="slide-brand"><div class="slide-brand-mark"><img src="../assets/img/cashclinic-logo.webp" alt=""></div><div class="slide-brand-text">كاش كلينيك<small>CASH CLINIC</small></div></div>
+    <div class="slide-brand"><div class="slide-brand-mark"><img src="../assets/img/cashclinic-logo.png" alt=""></div><div class="slide-brand-text">كاش كلينيك<small>CASH CLINIC</small></div></div>
     <div class="slide-meta">ABOUT US</div>
   </div>
   <div class="slide-body">
@@ -1140,7 +1147,7 @@ body.overview-mode .deck-progress { display: none; }
 <!-- ===== SLIDE 3: VISION ===== -->
 <section class="slide yellow">
   <div class="slide-header">
-    <div class="slide-brand"><div class="slide-brand-mark"><img src="../assets/img/cashclinic-logo.webp" alt=""></div><div class="slide-brand-text">كاش كلينيك<small>CASH CLINIC</small></div></div>
+    <div class="slide-brand"><div class="slide-brand-mark"><img src="../assets/img/cashclinic-logo.png" alt=""></div><div class="slide-brand-text">كاش كلينيك<small>CASH CLINIC</small></div></div>
     <div class="slide-meta">OUR VISION</div>
   </div>
   <div class="slide-body" style="justify-content: center;">
@@ -1158,7 +1165,7 @@ body.overview-mode .deck-progress { display: none; }
 <!-- ===== SLIDE 4: TRACK RECORD ===== -->
 <section class="slide purple-deep">
   <div class="slide-header">
-    <div class="slide-brand"><div class="slide-brand-mark"><img src="../assets/img/cashclinic-logo.webp" alt=""></div><div class="slide-brand-text">كاش كلينيك<small>CASH CLINIC</small></div></div>
+    <div class="slide-brand"><div class="slide-brand-mark"><img src="../assets/img/cashclinic-logo.png" alt=""></div><div class="slide-brand-text">كاش كلينيك<small>CASH CLINIC</small></div></div>
     <div class="slide-meta">TRACK RECORD</div>
   </div>
   <div class="slide-body">
@@ -1190,7 +1197,7 @@ body.overview-mode .deck-progress { display: none; }
 <!-- ===== SLIDE 5: REACH BY COUNTRY (animated bars) ===== -->
 <section class="slide">
   <div class="slide-header">
-    <div class="slide-brand"><div class="slide-brand-mark"><img src="../assets/img/cashclinic-logo.webp" alt=""></div><div class="slide-brand-text">كاش كلينيك<small>CASH CLINIC</small></div></div>
+    <div class="slide-brand"><div class="slide-brand-mark"><img src="../assets/img/cashclinic-logo.png" alt=""></div><div class="slide-brand-text">كاش كلينيك<small>CASH CLINIC</small></div></div>
     <div class="slide-meta">SESSIONS BY COUNTRY</div>
   </div>
   <div class="slide-body">
@@ -1246,7 +1253,7 @@ body.overview-mode .deck-progress { display: none; }
 <!-- ===== SLIDE 6: GROWTH TRAJECTORY (animated bars) ===== -->
 <section class="slide">
   <div class="slide-header">
-    <div class="slide-brand"><div class="slide-brand-mark"><img src="../assets/img/cashclinic-logo.webp" alt=""></div><div class="slide-brand-text">كاش كلينيك<small>CASH CLINIC</small></div></div>
+    <div class="slide-brand"><div class="slide-brand-mark"><img src="../assets/img/cashclinic-logo.png" alt=""></div><div class="slide-brand-text">كاش كلينيك<small>CASH CLINIC</small></div></div>
     <div class="slide-meta">GROWTH TRAJECTORY</div>
   </div>
   <div class="slide-body">
@@ -1286,7 +1293,7 @@ body.overview-mode .deck-progress { display: none; }
 <!-- ===== SLIDE 7: BY CHANNEL (animated donut) ===== -->
 <section class="slide yellow-soft">
   <div class="slide-header">
-    <div class="slide-brand"><div class="slide-brand-mark"><img src="../assets/img/cashclinic-logo.webp" alt=""></div><div class="slide-brand-text">كاش كلينيك<small>CASH CLINIC</small></div></div>
+    <div class="slide-brand"><div class="slide-brand-mark"><img src="../assets/img/cashclinic-logo.png" alt=""></div><div class="slide-brand-text">كاش كلينيك<small>CASH CLINIC</small></div></div>
     <div class="slide-meta">DELIVERY CHANNELS</div>
   </div>
   <div class="slide-body">
@@ -1348,7 +1355,7 @@ body.overview-mode .deck-progress { display: none; }
 <!-- ===== SLIDE 9: THE PROBLEM ===== -->
 <section class="slide">
   <div class="slide-header">
-    <div class="slide-brand"><div class="slide-brand-mark"><img src="../assets/img/cashclinic-logo.webp" alt=""></div><div class="slide-brand-text">كاش كلينيك<small>CASH CLINIC</small></div></div>
+    <div class="slide-brand"><div class="slide-brand-mark"><img src="../assets/img/cashclinic-logo.png" alt=""></div><div class="slide-brand-text">كاش كلينيك<small>CASH CLINIC</small></div></div>
     <div class="slide-meta">THE PROBLEM</div>
   </div>
   <div class="slide-body">
@@ -1379,7 +1386,7 @@ body.overview-mode .deck-progress { display: none; }
 <!-- ===== SLIDE 11: METHODOLOGY - INVERTED FUNNEL ===== -->
 <section class="slide">
   <div class="slide-header">
-    <div class="slide-brand"><div class="slide-brand-mark"><img src="../assets/img/cashclinic-logo.webp" alt=""></div><div class="slide-brand-text">كاش كلينيك<small>CASH CLINIC</small></div></div>
+    <div class="slide-brand"><div class="slide-brand-mark"><img src="../assets/img/cashclinic-logo.png" alt=""></div><div class="slide-brand-text">كاش كلينيك<small>CASH CLINIC</small></div></div>
     <div class="slide-meta">METHODOLOGY</div>
   </div>
   <div class="slide-body">
@@ -1421,7 +1428,7 @@ body.overview-mode .deck-progress { display: none; }
 <!-- ===== SLIDE 12: TWO DEPARTMENTS ===== -->
 <section class="slide">
   <div class="slide-header">
-    <div class="slide-brand"><div class="slide-brand-mark"><img src="../assets/img/cashclinic-logo.webp" alt=""></div><div class="slide-brand-text">كاش كلينيك<small>CASH CLINIC</small></div></div>
+    <div class="slide-brand"><div class="slide-brand-mark"><img src="../assets/img/cashclinic-logo.png" alt=""></div><div class="slide-brand-text">كاش كلينيك<small>CASH CLINIC</small></div></div>
     <div class="slide-meta">OUR DEPARTMENTS</div>
   </div>
   <div class="slide-body">
@@ -1453,7 +1460,7 @@ body.overview-mode .deck-progress { display: none; }
 <!-- ===== SLIDE 13: SUB-BRANDS ===== -->
 <section class="slide blue-soft">
   <div class="slide-header">
-    <div class="slide-brand"><div class="slide-brand-mark"><img src="../assets/img/cashclinic-logo.webp" alt=""></div><div class="slide-brand-text">كاش كلينيك<small>CASH CLINIC</small></div></div>
+    <div class="slide-brand"><div class="slide-brand-mark"><img src="../assets/img/cashclinic-logo.png" alt=""></div><div class="slide-brand-text">كاش كلينيك<small>CASH CLINIC</small></div></div>
     <div class="slide-meta">PRODUCT FAMILY</div>
   </div>
   <div class="slide-body">
@@ -1464,25 +1471,25 @@ body.overview-mode .deck-progress { display: none; }
     <div class="brands-grid">
       <div class="brand-tile reveal reveal-4">
         <div class="brand-tile-tag">CORE</div>
-        <div class="brand-tile-img"><img src="../assets/img/cashclinic-logo.webp" alt="Cash Clinic"></div>
+        <div class="brand-tile-img"><img src="../assets/img/cashclinic-logo.png" alt="Cash Clinic"></div>
         <div class="brand-tile-name">Cash Clinic</div>
         <div class="brand-tile-desc">المظلة الرئيسية – الاستشارات المالية الفردية والعائلية</div>
       </div>
       <div class="brand-tile reveal reveal-5">
         <div class="brand-tile-tag" style="background:var(--orange); color:white;">PREMIUM</div>
-        <div class="brand-tile-img"><img src="../assets/img/cashgold-logo.webp" alt="Cash Gold"></div>
+        <div class="brand-tile-img"><img src="../assets/img/cashgold-logo.png" alt="Cash Gold"></div>
         <div class="brand-tile-name">Cash Gold</div>
         <div class="brand-tile-desc">منتج النخبة – استشارات وخدمات للعائلات والأفراد ذوي الملاءة العالية</div>
       </div>
       <div class="brand-tile reveal reveal-6">
         <div class="brand-tile-tag" style="background:var(--purple); color:white;">GROWTH</div>
-        <div class="brand-tile-img"><img src="../assets/img/cashnas-logo.webp" alt="Cash Nas"></div>
+        <div class="brand-tile-img"><img src="../assets/img/cashnas-logo.png" alt="Cash Nas"></div>
         <div class="brand-tile-name">Cash Nas</div>
         <div class="brand-tile-desc">برنامج النمو والوفرة المالية – بناء عادات مالية تتراكم سنة بعد سنة</div>
       </div>
       <div class="brand-tile reveal reveal-7">
         <div class="brand-tile-tag" style="background:var(--blue); color:white;">FOUNDERS</div>
-        <div class="brand-tile-img"><img src="../assets/img/cashriyada-logo.webp" alt="Cash Riyada"></div>
+        <div class="brand-tile-img"><img src="../assets/img/cashriyada-logo.png" alt="Cash Riyada"></div>
         <div class="brand-tile-name">Cash Riyada</div>
         <div class="brand-tile-desc">خط رواد الأعمال – إدارة الكاش والقرارات المالية في مراحل النمو والأزمة</div>
       </div>
@@ -1494,7 +1501,7 @@ body.overview-mode .deck-progress { display: none; }
 <!-- ===== SLIDE 14: TEAM ===== -->
 <section class="slide">
   <div class="slide-header">
-    <div class="slide-brand"><div class="slide-brand-mark"><img src="../assets/img/cashclinic-logo.webp" alt=""></div><div class="slide-brand-text">كاش كلينيك<small>CASH CLINIC</small></div></div>
+    <div class="slide-brand"><div class="slide-brand-mark"><img src="../assets/img/cashclinic-logo.png" alt=""></div><div class="slide-brand-text">كاش كلينيك<small>CASH CLINIC</small></div></div>
     <div class="slide-meta">OUR TEAM</div>
   </div>
   <div class="slide-body">
@@ -1504,26 +1511,26 @@ body.overview-mode .deck-progress { display: none; }
 
     <div class="team-grid">
       <div class="team-card reveal reveal-4">
-        <div class="team-avatar">غ</div>
+        <div class="team-avatar"><img src="../assets/img/team/ghaliya.jpg" alt="غالية"></div>
         <div class="team-name">غالية</div>
         <div class="team-role">قسم العائلة · المؤسِّسة الرئيسية</div>
         <div class="team-bio">المسؤولة عن قسم العائلة، الوجه الرئيسي لكاش كلينيك، وقائدة المحتوى التخصصي.</div>
       </div>
       <div class="team-card reveal reveal-5">
-        <div class="team-avatar">س</div>
+        <div class="team-avatar"><img src="../assets/img/team/sara.jpg" alt="سارة"></div>
         <div class="team-name">سارة</div>
         <div class="team-role">قسم العائلة · مستشارة</div>
         <div class="team-bio">شريكة قسم العائلة – تركّز على الجانب السلوكي والإرشاد العائلي للأزواج.</div>
       </div>
       <div class="team-card reveal reveal-6">
-        <div class="team-avatar">ح</div>
+        <div class="team-avatar"><img src="../assets/img/team/hasan.jpg" alt="حسن"></div>
         <div class="team-name">حسن</div>
         <div class="team-role">قسم رواد الأعمال · المتخصص</div>
         <div class="team-bio">يقود قسم رواد الأعمال بتخصص في إدارة الكاش – للأزمات والنمو على مستوى الخليج.</div>
       </div>
       <div class="team-card reveal reveal-7">
-        <div class="team-avatar">إ</div>
-        <div class="team-name">إسراء</div>
+        <div class="team-avatar"><img src="../assets/img/team/amina.jpg" alt="أمينة"></div>
+        <div class="team-name">أمينة</div>
         <div class="team-role">العمليات والتنسيق</div>
         <div class="team-bio">تُدير عمليات الجدولة والتنسيق والمتابعة مع العملاء والشركاء.</div>
       </div>
@@ -1546,7 +1553,7 @@ body.overview-mode .deck-progress { display: none; }
 <!-- ===== SLIDE 16: WHY CHARITIES CHOOSE US ===== -->
 <section class="slide purple-deep">
   <div class="slide-header">
-    <div class="slide-brand"><div class="slide-brand-mark"><img src="../assets/img/cashclinic-logo.webp" alt=""></div><div class="slide-brand-text">كاش كلينيك<small>CASH CLINIC</small></div></div>
+    <div class="slide-brand"><div class="slide-brand-mark"><img src="../assets/img/cashclinic-logo.png" alt=""></div><div class="slide-brand-text">كاش كلينيك<small>CASH CLINIC</small></div></div>
     <div class="slide-meta">WHY CHARITIES CHOOSE US</div>
   </div>
   <div class="slide-body">
@@ -1568,7 +1575,7 @@ body.overview-mode .deck-progress { display: none; }
 <!-- ===== SLIDE 17: 4-SESSION PROGRAM ===== -->
 <section class="slide">
   <div class="slide-header">
-    <div class="slide-brand"><div class="slide-brand-mark"><img src="../assets/img/cashclinic-logo.webp" alt=""></div><div class="slide-brand-text">كاش كلينيك<small>CASH CLINIC</small></div></div>
+    <div class="slide-brand"><div class="slide-brand-mark"><img src="../assets/img/cashclinic-logo.png" alt=""></div><div class="slide-brand-text">كاش كلينيك<small>CASH CLINIC</small></div></div>
     <div class="slide-meta">CHARITY PROGRAM · 4 SESSIONS</div>
   </div>
   <div class="slide-body">
@@ -1589,7 +1596,7 @@ body.overview-mode .deck-progress { display: none; }
 <!-- ===== SLIDE 18: FULL PROCESS WITH CHARITY ===== -->
 <section class="slide dark">
   <div class="slide-header">
-    <div class="slide-brand"><div class="slide-brand-mark"><img src="../assets/img/cashclinic-logo.webp" alt=""></div><div class="slide-brand-text">كاش كلينيك<small>CASH CLINIC</small></div></div>
+    <div class="slide-brand"><div class="slide-brand-mark"><img src="../assets/img/cashclinic-logo.png" alt=""></div><div class="slide-brand-text">كاش كلينيك<small>CASH CLINIC</small></div></div>
     <div class="slide-meta">PARTNERSHIP WORKFLOW</div>
   </div>
   <div class="slide-body">
@@ -1611,7 +1618,7 @@ body.overview-mode .deck-progress { display: none; }
 <!-- ===== SLIDE 19: REPORTING SYSTEM ===== -->
 <section class="slide">
   <div class="slide-header">
-    <div class="slide-brand"><div class="slide-brand-mark"><img src="../assets/img/cashclinic-logo.webp" alt=""></div><div class="slide-brand-text">كاش كلينيك<small>CASH CLINIC</small></div></div>
+    <div class="slide-brand"><div class="slide-brand-mark"><img src="../assets/img/cashclinic-logo.png" alt=""></div><div class="slide-brand-text">كاش كلينيك<small>CASH CLINIC</small></div></div>
     <div class="slide-meta">REPORTING SYSTEM</div>
   </div>
   <div class="slide-body">
@@ -1646,7 +1653,7 @@ body.overview-mode .deck-progress { display: none; }
 <!-- ===== SLIDE 20: PRICING ===== -->
 <section class="slide yellow-soft">
   <div class="slide-header">
-    <div class="slide-brand"><div class="slide-brand-mark"><img src="../assets/img/cashclinic-logo.webp" alt=""></div><div class="slide-brand-text">كاش كلينيك<small>CASH CLINIC</small></div></div>
+    <div class="slide-brand"><div class="slide-brand-mark"><img src="../assets/img/cashclinic-logo.png" alt=""></div><div class="slide-brand-text">كاش كلينيك<small>CASH CLINIC</small></div></div>
     <div class="slide-meta">CHARITY PRICING</div>
   </div>
   <div class="slide-body">
@@ -1670,7 +1677,7 @@ body.overview-mode .deck-progress { display: none; }
 <!-- ===== SLIDE 21: CLOSING / CONTACT ===== -->
 <section class="slide purple-deep">
   <div class="slide-header">
-    <div class="slide-brand"><div class="slide-brand-mark"><img src="../assets/img/cashclinic-logo.webp" alt=""></div><div class="slide-brand-text">كاش كلينيك<small>CASH CLINIC</small></div></div>
+    <div class="slide-brand"><div class="slide-brand-mark"><img src="../assets/img/cashclinic-logo.png" alt=""></div><div class="slide-brand-text">كاش كلينيك<small>CASH CLINIC</small></div></div>
     <div class="slide-meta">LET'S PARTNER</div>
   </div>
   <div class="closing-cta">
